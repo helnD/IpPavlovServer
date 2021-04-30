@@ -1,0 +1,16 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+Domain/obj/
+bin/
+# Rider ignored files
+/projectSettingsUpdater.xml
+/modules.xml
+/.idea.IpPavlov.iml
+*.idea/
+/contentModel.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../:\Users\1\Documents\Владимир\Rooming\Rooming.Server\IpPavlov\.idea\.idea.IpPavlov\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
