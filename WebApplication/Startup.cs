@@ -43,8 +43,10 @@ namespace WebApplication
                     builder.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
 
-            services.AddDbContext<AppDbContext>(builder =>
-                builder.UseNpgsql(Configuration.GetConnectionString("AppDatabase")));
+            services.AddDbContext<AppDbContext>(
+                option => option.UseNpgsql(
+                    Configuration.GetConnectionString("AppDatabase"),
+                    builder => builder.MigrationsAssembly("WebApplication")));
             services.AddScoped<IDbContext>(serviceProvider => serviceProvider.GetRequiredService<AppDbContext>());
             services.AddAsyncInitializer<DatabaseInitializer>();
             services.AddTransient<DataSeed>();

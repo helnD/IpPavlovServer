@@ -2,6 +2,7 @@
 using Extensions.Hosting.AsyncInitialization;
 using Infrastructure;
 using Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Setup.Database
 {
