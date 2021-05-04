@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using Domain;
 using Infrastructure.Abstractions;
 using Infrastructure.Settings;
@@ -27,9 +28,10 @@ namespace Infrastructure
         private const string Categories = "categories";
         private const string Category = "category";
 
-        public DataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings)
+        public DataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings, ILogger<DataSeed> logger)
         {
             _context = context;
+            _logger = logger;
             _initializationSettings = initializationSettings.Value;
         }
 
@@ -46,10 +48,10 @@ namespace Infrastructure
             var pathToAssembly = Path.GetDirectoryName(GetType().Assembly.Location);
             var categoriesFile = Path.Combine(pathToAssembly, _initializationSettings.CategoriesFile);
 
-            var categoriesDocument = new XmlDocument();
-            categoriesDocument.Load(categoriesFile);
+            var categoriesDocument = XDocument.Load(new FileStream(categoriesFile, FileMode.Open),
+                LoadOptions.None);
 
-            var categoriesNode = categoriesDocument[Categories];
+            var categoriesNode = categoriesDocument.Descendants(Categories).First();
 
             if (categoriesNode == null)
             {
@@ -57,19 +59,29 @@ namespace Infrastructure
                     "You should create file with categories before start database initialization");
             }
 
-            var categoriesReader = new XmlNodeReader(categoriesNode);
 
-            while (categoriesReader.ReadToDescendant(Category))
+            foreach (var categoryNode in categoriesDocument.Descendants(Category))
             {
-                var category = await categoriesReader.ReadElementContentAsStringAsync();
-                await _context.Categories.AddAsync(new Category
-                {
-                    Name = category
-                }, cancellationToken);
+                await _context.Categories.AddAsync(CreateCategory(categoryNode), cancellationToken);
             }
 
             await _context.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Categories initialized");
+        }
+
+        private Category CreateCategory(XElement categoryNode)
+        {
+            var name = categoryNode.Value;
+            var iconName = categoryNode.Attribute("icon")?.Value;
+
+            return new Category
+            {
+                Name = name,
+                Icon = new Image
+                {
+                    Name = iconName
+                }
+            };
         }
     }
 }

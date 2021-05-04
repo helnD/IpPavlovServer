@@ -38,6 +38,7 @@ namespace WebApplication
             services.AddTransient<DataSeed>();
 
             services.Configure<DatabaseInitialization>(Configuration.GetSection("DatabaseInitialization"));
+            services.Configure<ImagesSettings>(Configuration.GetSection("Images"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

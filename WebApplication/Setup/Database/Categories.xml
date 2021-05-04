@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <categories>
-    <category>растительное масло</category>
-    <category>фруктовые консервы</category>
-    <category>овощные и грибные консервы</category>
-    <category>рыбные консервы</category>
-    <category>продукты быстрого приготовления</category>
-    <category>соусы</category>
-    <category>супы и готовые блюда</category>
-    <category>дрожжи, пекарные порошки и концентраты</category>
-    <category>маслины</category>
-    <category>мясные консервы</category>
-    <category>молочная продукция</category>
-    <category>чай и кофе</category>
-    <category>крупы и мука</category>
-    <category>макаронные изделия</category>
-    <category>приправы и пряности</category>
-    <category>шоколад и кондитерские изделия</category>
-    <category>питьевая вода</category>
-    <category>хоз. товары</category>
+    <category icon="oil.png">растительное масло</category>
+    <category icon="oil.png">фруктовые консервы</category>
+    <category icon="oil.png">овощные и грибные консервы</category>
+    <category icon="oil.png">рыбные консервы</category>
+    <category icon="oil.png">продукты быстрого приготовления</category>
+    <category icon="oil.png">соусы</category>
+    <category icon="oil.png">супы и готовые блюда</category>
+    <category icon="oil.png">дрожжи, пекарные порошки и концентраты</category>
+    <category icon="oil.png">маслины</category>
+    <category icon="oil.png">мясные консервы</category>
+    <category icon="oil.png">молочная продукция</category>
+    <category icon="oil.png">чай и кофе</category>
+    <category icon="oil.png">крупы и мука</category>
+    <category icon="oil.png">макаронные изделия</category>
+    <category icon="oil.png">приправы и пряности</category>
+    <category icon="oil.png">шоколад и кондитерские изделия</category>
+    <category icon="oil.png">питьевая вода</category>
+    <category icon="oil.png">хоз. товары</category>
 </categories>

@@ -23,10 +23,43 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Setup\Database\Categories.xml" />
       <EmbeddedResource Include="Setup\Database\Categories.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="Images\Categories\oil.png" />
+      <EmbeddedResource Include="Images\Categories\oil.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\ideal.png" />
+      <EmbeddedResource Include="Images\Partners\ideal.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\ml-best.svg" />
+      <EmbeddedResource Include="Images\Partners\ml-best.svg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Products\ананасы.png" />
+      <EmbeddedResource Include="Images\Products\ананасы.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Products\клубника.png" />
+      <EmbeddedResource Include="Images\Products\клубника.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Products\маслины.png" />
+      <EmbeddedResource Include="Images\Products\маслины.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Products\масло.png" />
+      <EmbeddedResource Include="Images\Products\масло.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Products\персики.png" />
+      <EmbeddedResource Include="Images\Products\персики.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
+
+    
 
 </Project>
