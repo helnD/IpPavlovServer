@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess
 {
-    public class AppDbContext : DbContext, IDbContext
+    public sealed class AppDbContext : DbContext, IDbContext
     {
         /// <inheritdoc/>
         public DbSet<Category> Categories { get; init; }
