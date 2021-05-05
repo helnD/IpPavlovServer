@@ -59,6 +59,10 @@
       <EmbeddedResource Include="Images\Products\персики.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="Files\price-list.xlsx" />
+      <EmbeddedResource Include="Files\price-list.xlsx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
     

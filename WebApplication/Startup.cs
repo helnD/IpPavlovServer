@@ -52,7 +52,8 @@ namespace WebApplication
             services.AddTransient<DataSeed>();
 
             services.Configure<DatabaseInitialization>(Configuration.GetSection("DatabaseInitialization"));
-            services.Configure<ImagesSettings>(Configuration.GetSection("Images"));
+            services.Configure<ImagesSettings>(Configuration.GetSection("Resources:Images"));
+            services.Configure<FilesSettings>(Configuration.GetSection("Resources:Files"));
 
             services.AddMediatR(typeof(GetLeadersQuery).Assembly);
         }
