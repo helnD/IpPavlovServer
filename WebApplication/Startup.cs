@@ -70,13 +70,14 @@ namespace WebApplication
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication v1"));
             }
 
+            app.UseRouting();
+
             app.UseCors(builder =>
                 builder.WithOrigins(Configuration.GetSection("FrontendOrigins:DevOrigin").Value,
-                    Configuration.GetSection("FrontendOrigins:ReleaseOrigin").Value)
+                        Configuration.GetSection("FrontendOrigins:ReleaseOrigin").Value)
                     .AllowAnyHeader()
                     .AllowAnyMethod()
             );
-            app.UseRouting();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
