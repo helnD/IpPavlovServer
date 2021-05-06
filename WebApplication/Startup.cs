@@ -56,6 +56,8 @@ namespace WebApplication
             services.Configure<FilesSettings>(Configuration.GetSection("Resources:Files"));
 
             services.AddMediatR(typeof(GetLeadersQuery).Assembly);
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +70,12 @@ namespace WebApplication
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication v1"));
             }
 
+            app.UseCors(builder =>
+                builder.WithOrigins(Configuration.GetSection("FrontendOrigins:DevOrigin").Value,
+                    Configuration.GetSection("FrontendOrigins:ReleaseOrigin").Value)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+            );
             app.UseRouting();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
