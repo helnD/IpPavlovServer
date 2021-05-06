@@ -1,0 +1,6 @@
+﻿**/obj/
+**/bin/
+**/.idea
+appsettings.json
+appsettings.Development.json
+launchSettings.json
