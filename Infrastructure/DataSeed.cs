@@ -24,14 +24,17 @@ namespace Infrastructure
         private readonly IDbContext _context;
         private readonly DatabaseInitialization _initializationSettings;
         private readonly ILogger<DataSeed> _logger;
+        private readonly ImagesSettings _imagesSettings;
 
         private const string Categories = "categories";
         private const string Category = "category";
 
-        public DataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings, ILogger<DataSeed> logger)
+        public DataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings, ILogger<DataSeed> logger,
+            IOptions<ImagesSettings> imagesSettings)
         {
             _context = context;
             _logger = logger;
+            _imagesSettings = imagesSettings.Value;
             _initializationSettings = initializationSettings.Value;
         }
 
@@ -79,7 +82,7 @@ namespace Infrastructure
                 Name = name,
                 Icon = new Image
                 {
-                    Name = iconName
+                    Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Categories, iconName)
                 }
             };
         }
