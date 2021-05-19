@@ -18,6 +18,11 @@ namespace Domain
         public string Name { get; init; }
 
         /// <summary>
+        /// Name for routing transition.
+        /// </summary>
+        public string RouteName { get; init; }
+
+        /// <summary>
         /// Products list.
         /// </summary>
         public IList<Product> Products { get; init; }

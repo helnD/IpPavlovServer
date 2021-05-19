@@ -13,6 +13,11 @@ namespace Domain
         public int Id { get; init; }
 
         /// <summary>
+        /// Number of product position in excel document.
+        /// </summary>
+        public int DocumentId { get; init; }
+
+        /// <summary>
         /// Product description.
         /// </summary>
         public string Description { get; init; }
@@ -21,6 +26,11 @@ namespace Domain
         /// Quantity of products.
         /// </summary>
         public int Quantity { get; init; }
+
+        /// <summary>
+        /// Unit of measurement.
+        /// </summary>
+        public string Unit { get; init; }
 
         /// <summary>
         /// Price of product.
