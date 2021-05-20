@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 using Domain;
 using Infrastructure.Abstractions;
@@ -14,28 +11,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure
+namespace Infrastructure.FillingDatabase
 {
     /// <summary>
-    /// Class for database initial seed.
+    /// Functionality for categories data seed.
     /// </summary>
-    public class DataSeed
+    public class CategoriesDataSeed
     {
         private readonly IDbContext _context;
         private readonly DatabaseInitialization _initializationSettings;
-        private readonly ILogger<DataSeed> _logger;
+        private readonly ILogger<CategoriesDataSeed> _logger;
         private readonly ImagesSettings _imagesSettings;
 
         private const string Categories = "categories";
         private const string Category = "category";
 
-        public DataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings, ILogger<DataSeed> logger,
-            IOptions<ImagesSettings> imagesSettings)
+        public CategoriesDataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings,
+            IOptions<ImagesSettings> imagesSettings, ILogger<CategoriesDataSeed> logger)
         {
             _context = context;
+            _initializationSettings = initializationSettings.Value;
             _logger = logger;
             _imagesSettings = imagesSettings.Value;
-            _initializationSettings = initializationSettings.Value;
         }
 
         /// <summary>

@@ -61,10 +61,42 @@
       </EmbeddedResource>
       <None Remove="Files\price-list.xlsx" />
       <EmbeddedResource Include="Files\price-list.xlsx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Categories\can.png" />
       <EmbeddedResource Include="Images\Categories\can.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\barko.jpg" />
+      <EmbeddedResource Include="Images\Partners\barko.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\golden-seed.jpg" />
+      <EmbeddedResource Include="Images\Partners\golden-seed.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\rolton.jpg" />
+      <EmbeddedResource Include="Images\Partners\rolton.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Certificates\cert1.jpg" />
+      <EmbeddedResource Include="Images\Certificates\cert1.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Certificates\cert2.jpg" />
+      <EmbeddedResource Include="Images\Certificates\cert2.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Certificates\cert3.jpg" />
+      <EmbeddedResource Include="Images\Certificates\cert3.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Setup\Database\Certificates.xml" />
+      <EmbeddedResource Include="Setup\Database\Certificates.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Setup\Database\Partners.xml" />
+      <EmbeddedResource Include="Setup\Database\Partners.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

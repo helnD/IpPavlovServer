@@ -2,6 +2,7 @@
 using Extensions.Hosting.AsyncInitialization;
 using Infrastructure;
 using Infrastructure.DataAccess;
+using Infrastructure.FillingDatabase;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Setup.Database
@@ -26,7 +27,7 @@ namespace WebApplication.Setup.Database
         public async Task InitializeAsync()
         {
             await _context.Database.EnsureCreatedAsync();
-            await _dataSeed.SeedCategories(default);
+            await _dataSeed.SeedTestDatabase(default);
         }
     }
 }
