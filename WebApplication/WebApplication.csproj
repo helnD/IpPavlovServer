@@ -5,15 +5,21 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
         <PackageReference Include="Extensions.Hosting.AsyncInitialization" Version="1.0.0" />
         <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-preview.3.21201.2">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="NLog" Version="4.7.9" />
         <PackageReference Include="NLog.Web.AspNetCore" Version="4.12.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0-preview3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="Unidecode.NET" Version="2.1.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,31 +35,31 @@
       </EmbeddedResource>
       <None Remove="Images\Categories\oil.png" />
       <EmbeddedResource Include="Images\Categories\oil.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Partners\ideal.png" />
       <EmbeddedResource Include="Images\Partners\ideal.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Partners\ml-best.svg" />
       <EmbeddedResource Include="Images\Partners\ml-best.svg">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Products\ананасы.png" />
       <EmbeddedResource Include="Images\Products\ананасы.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Products\клубника.png" />
       <EmbeddedResource Include="Images\Products\клубника.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Products\маслины.png" />
       <EmbeddedResource Include="Images\Products\маслины.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Products\масло.png" />
       <EmbeddedResource Include="Images\Products\масло.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Products\персики.png" />
       <EmbeddedResource Include="Images\Products\персики.png">
@@ -61,7 +67,43 @@
       </EmbeddedResource>
       <None Remove="Files\price-list.xlsx" />
       <EmbeddedResource Include="Files\price-list.xlsx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Categories\can.png" />
+      <EmbeddedResource Include="Images\Categories\can.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\barko.jpg" />
+      <EmbeddedResource Include="Images\Partners\barko.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\golden-seed.jpg" />
+      <EmbeddedResource Include="Images\Partners\golden-seed.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\rolton.jpg" />
+      <EmbeddedResource Include="Images\Partners\rolton.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Certificates\cert1.jpg" />
+      <EmbeddedResource Include="Images\Certificates\cert1.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Certificates\cert2.jpg" />
+      <EmbeddedResource Include="Images\Certificates\cert2.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Certificates\cert3.jpg" />
+      <EmbeddedResource Include="Images\Certificates\cert3.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Setup\Database\Certificates.xml" />
+      <EmbeddedResource Include="Setup\Database\Certificates.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Setup\Database\Partners.xml" />
+      <EmbeddedResource Include="Setup\Database\Partners.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>
 

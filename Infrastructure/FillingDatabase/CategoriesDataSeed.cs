@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 using Domain;
 using Infrastructure.Abstractions;
@@ -14,25 +12,30 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure
+namespace Infrastructure.FillingDatabase
 {
     /// <summary>
-    /// Class for database initial seed.
+    /// Functionality for categories data seed.
     /// </summary>
-    public class DataSeed
+    public class CategoriesDataSeed
     {
         private readonly IDbContext _context;
         private readonly DatabaseInitialization _initializationSettings;
-        private readonly ILogger<DataSeed> _logger;
+        private readonly ILogger<CategoriesDataSeed> _logger;
+        private readonly ImagesSettings _imagesSettings;
+        private readonly Unidecode _unidecode;
 
         private const string Categories = "categories";
         private const string Category = "category";
 
-        public DataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings, ILogger<DataSeed> logger)
+        public CategoriesDataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings,
+            IOptions<ImagesSettings> imagesSettings, ILogger<CategoriesDataSeed> logger, Unidecode unidecode)
         {
             _context = context;
-            _logger = logger;
             _initializationSettings = initializationSettings.Value;
+            _logger = logger;
+            _unidecode = unidecode;
+            _imagesSettings = imagesSettings.Value;
         }
 
         /// <summary>
@@ -73,13 +76,16 @@ namespace Infrastructure
         {
             var name = categoryNode.Value;
             var iconName = categoryNode.Attribute("icon")?.Value;
+            var routeName = Regex.Replace(_unidecode(name), @"[',.-_]", "")
+                .Replace(' ', '_');
 
             return new Category
             {
                 Name = name,
+                RouteName = routeName,
                 Icon = new Image
                 {
-                    Name = iconName
+                    Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Categories, iconName)
                 }
             };
         }
