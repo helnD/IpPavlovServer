@@ -6,7 +6,7 @@ using Infrastructure.Abstractions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace UseCases.GetCategories
+namespace UseCases.Categories.GetCategories
 {
     /// <summary>
     /// Handle <see cref="GetAllCategoriesQuery"/>.

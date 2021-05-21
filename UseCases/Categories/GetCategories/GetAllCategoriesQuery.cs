@@ -2,7 +2,7 @@
 using Domain;
 using MediatR;
 
-namespace UseCases.GetCategories
+namespace UseCases.Categories.GetCategories
 {
     /// <summary>
     /// Get all categories.
