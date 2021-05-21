@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -22,16 +23,18 @@ namespace Infrastructure.FillingDatabase
         private readonly DatabaseInitialization _initializationSettings;
         private readonly ILogger<CategoriesDataSeed> _logger;
         private readonly ImagesSettings _imagesSettings;
+        private readonly Unidecode _unidecode;
 
         private const string Categories = "categories";
         private const string Category = "category";
 
         public CategoriesDataSeed(IDbContext context, IOptions<DatabaseInitialization> initializationSettings,
-            IOptions<ImagesSettings> imagesSettings, ILogger<CategoriesDataSeed> logger)
+            IOptions<ImagesSettings> imagesSettings, ILogger<CategoriesDataSeed> logger, Unidecode unidecode)
         {
             _context = context;
             _initializationSettings = initializationSettings.Value;
             _logger = logger;
+            _unidecode = unidecode;
             _imagesSettings = imagesSettings.Value;
         }
 
@@ -73,10 +76,13 @@ namespace Infrastructure.FillingDatabase
         {
             var name = categoryNode.Value;
             var iconName = categoryNode.Attribute("icon")?.Value;
+            var routeName = Regex.Replace(_unidecode(name), @"[',.-_]", "")
+                .Replace(' ', '_');
 
             return new Category
             {
                 Name = name,
+                RouteName = routeName,
                 Icon = new Image
                 {
                     Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Categories, iconName)
