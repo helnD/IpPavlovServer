@@ -26,7 +26,7 @@ namespace WebApplication.Setup.Database
         /// </summary>
         public async Task InitializeAsync()
         {
-            await _context.Database.EnsureCreatedAsync();
+            await _context.Database.MigrateAsync();
             await _dataSeed.SeedTestDatabase(default);
         }
     }

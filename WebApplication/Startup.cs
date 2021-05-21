@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using UseCases.Leaders.GetLeaders;
+using WebApplication.Services;
 using WebApplication.Setup.Database;
 
 namespace WebApplication
@@ -51,6 +52,12 @@ namespace WebApplication
             services.AddScoped<IDbContext>(serviceProvider => serviceProvider.GetRequiredService<AppDbContext>());
             services.AddAsyncInitializer<DatabaseInitializer>();
             services.AddTransient<DataSeed>();
+
+            services.AddTransient<CategoriesDataSeed>();
+            services.AddTransient<CertificatesDataSeed>();
+            services.AddTransient<ProductsDataSeed>();
+            services.AddTransient<PartnersDataSeed>();
+            services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
 
             services.Configure<DatabaseInitialization>(Configuration.GetSection("DatabaseInitialization"));
             services.Configure<ImagesSettings>(Configuration.GetSection("Resources:Images"));

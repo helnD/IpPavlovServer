@@ -1,15 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using Domain;
-using Infrastructure.Abstractions;
-using Infrastructure.Settings;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Infrastructure.FillingDatabase
 {
@@ -19,10 +9,17 @@ namespace Infrastructure.FillingDatabase
     public class DataSeed
     {
         private readonly CategoriesDataSeed _categoriesDataSeed;
+        private readonly PartnersDataSeed _partnersDataSeed;
+        private readonly ProductsDataSeed _productsDataSeed;
+        private readonly CertificatesDataSeed _certificatesDataSeed;
 
-        public DataSeed(CategoriesDataSeed categoriesDataSeed)
+        public DataSeed(CategoriesDataSeed categoriesDataSeed, PartnersDataSeed partnersDataSeed,
+            ProductsDataSeed productsDataSeed, CertificatesDataSeed certificatesDataSeed)
         {
             _categoriesDataSeed = categoriesDataSeed;
+            _partnersDataSeed = partnersDataSeed;
+            _productsDataSeed = productsDataSeed;
+            _certificatesDataSeed = certificatesDataSeed;
         }
 
         /// <summary>
@@ -30,7 +27,10 @@ namespace Infrastructure.FillingDatabase
         /// </summary>
         public async Task SeedTestDatabase(CancellationToken cancellationToken)
         {
+            await _certificatesDataSeed.SeedCategories(cancellationToken);
             await _categoriesDataSeed.SeedCategories(cancellationToken);
+            await _partnersDataSeed.SeedPartners(cancellationToken);
+            await _productsDataSeed.SeedProducts(cancellationToken);
         }
     }
 }

@@ -2,28 +2,28 @@
 
 <partners>
     <partner name="Медведь любимый" icon="ml-best.svg">
-        <decription>
+        <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </decription>
+        </description>
     </partner>
     <partner name="Ideal" icon="ideal.png">
-        <decription>
+        <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </decription>
+        </description>
     </partner>
     <partner name="Барко" icon="barko.jpg">
-        <decription>
+        <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </decription>
+        </description>
     </partner>
     <partner name="Золотая семечка" icon="golden-seed.jpg">
-        <decription>
+        <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </decription>
+        </description>
     </partner>
     <partner name="Ролтон" icon="rolton.jpg">
-        <decription>
+        <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </decription>
+        </description>
     </partner>
 </partners>

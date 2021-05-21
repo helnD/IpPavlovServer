@@ -18,6 +18,11 @@ namespace Domain
         public int DocumentId { get; init; }
 
         /// <summary>
+        /// Product code.
+        /// </summary>
+        public int Code { get; init; }
+
+        /// <summary>
         /// Product description.
         /// </summary>
         public string Description { get; init; }
