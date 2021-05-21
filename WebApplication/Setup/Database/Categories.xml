@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <categories>
-    <category icon="oil.png">растительное масло</category>
-    <category icon="oil.png">фруктовые консервы</category>
-    <category icon="oil.png">овощные и грибные консервы</category>
-    <category icon="oil.png">рыбные консервы</category>
-    <category icon="oil.png">продукты быстрого приготовления</category>
-    <category icon="oil.png">соусы</category>
-    <category icon="oil.png">сахар</category>
-    <category icon="oil.png">супы и готовые блюда</category>
-    <category icon="oil.png">дрожжи, пекарные порошки и концентраты</category>
-    <category icon="oil.png">маслины</category>
-    <category icon="oil.png">мясные консервы</category>
-    <category icon="oil.png">молочная продукция</category>
-    <category icon="oil.png">чай и кофе</category>
-    <category icon="oil.png">крупы и мука</category>
-    <category icon="oil.png">макаронные изделия</category>
-    <category icon="oil.png">приправы и пряности</category>
-    <category icon="oil.png">шоколад и кондитерские изделия</category>
-    <category icon="oil.png">питьевая вода</category>
-    <category icon="oil.png">хоз. товары</category>
+    <category icon="oil.svg">растительное масло</category>
+    <category icon="canned-fruit.svg">фруктовые консервы</category>
+    <category icon="canned-vegetables-and-mushrooms.svg">овощные и грибные консервы</category>
+    <category icon="canned-fish">рыбные консервы</category>
+    <category icon="fast-food.svg">продукты быстрого приготовления</category>
+    <category icon="sauce.svg">соусы</category>
+    <category icon="sugar.svg">сахар</category>
+    <category icon="ready-made-food.svg">супы и готовые блюда</category>
+    <category icon="powder.svg">дрожжи, пекарные порошки и концентраты</category>
+    <category icon="olives.svg">маслины</category>
+    <category icon="canned-meat.svg">мясные консервы</category>
+    <category icon="milk-production.svg">молочная продукция</category>
+    <category icon="tea-and-coffee.svg">чай и кофе</category>
+    <category icon="flour.svg">крупы и мука</category>
+    <category icon="pasta.svg">макаронные изделия</category>
+    <category icon="species.svg">приправы и пряности</category>
+    <category icon="chocolate.svg">шоколад и кондитерские изделия</category>
+    <category icon="water.svg">питьевая вода</category>
+    <category icon="household-goods.svg">хоз. товары</category>
 </categories>
