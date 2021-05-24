@@ -74,7 +74,7 @@ namespace Infrastructure.FillingDatabase
         {
             var name = partnerNode.Attribute("name")?.Value;
             var iconName = partnerNode.Attribute("icon")?.Value;
-            var description = partnerNode.Descendants(Description).First().Value;
+            var description = partnerNode.Descendants(Description).First().Value.Trim();
 
             return new Partner
             {

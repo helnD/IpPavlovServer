@@ -73,7 +73,7 @@ namespace Infrastructure.FillingDatabase
         private Certificate CreateCertificate(XElement certificateNode)
         {
             var imageName = certificateNode.Attribute("image")?.Value;
-            var description = certificateNode.Descendants(Description).First().Value;
+            var description = certificateNode.Descendants(Description).First().Value.Trim();
 
             return new Certificate
             {
