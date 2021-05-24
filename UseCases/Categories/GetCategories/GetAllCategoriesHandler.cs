@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -30,13 +31,19 @@ namespace UseCases.Categories.GetCategories
         /// <param name="request"><see cref="GetAllCategoriesQuery"/> request.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>All categories.</returns>
-        public async Task<IEnumerable<Category>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Category>> Handle(GetAllCategoriesQuery request,
+            CancellationToken cancellationToken)
         {
-            var categories = await _context.Categories
-                .Include(category => category.Icon)
-                .ToListAsync(cancellationToken);
+            IQueryable<Category> categories = _context.Categories
+                .Include(category => category.Icon);
 
-            return categories;
+            if (!string.IsNullOrWhiteSpace(request.Name))
+            {
+                var upperName = request.Name.ToUpper();
+                categories = categories.Where(category => category.Name.ToUpper().Contains(upperName));
+            }
+
+            return await categories.ToListAsync(cancellationToken);
         }
     }
 }
