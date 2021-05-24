@@ -68,6 +68,8 @@ namespace WebApplication
 
             services.AddMediatR(typeof(GetLeadersQuery).Assembly);
 
+            services.AddAutoMapper(typeof(GetLeadersQuery).Assembly);
+
             services.AddCors();
         }
 
