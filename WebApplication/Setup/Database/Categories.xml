@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<categories>
+<categories type="Category">
     <category icon="oil.svg">растительное масло</category>
     <category icon="canned-fruit.svg">фруктовые консервы</category>
     <category icon="canned-vegetables-and-mushrooms.svg">овощные и грибные консервы</category>
