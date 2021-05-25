@@ -53,9 +53,12 @@ namespace Infrastructure.FillingDatabase
                     $"You should create file with {className} entity before start database initialization");
             }
 
-            foreach (var partnerNode in collectionNode.Descendants())
+            var childNodes = collectionNode.Descendants()
+                .Where(node => node.Parent == collectionNode);
+
+            foreach (var node in childNodes)
             {
-                await _context.Entity<T>().AddAsync(createEntity(partnerNode), cancellationToken);
+                await _context.Entity<T>().AddAsync(createEntity(node), cancellationToken);
             }
 
             await _context.SaveChangesAsync(cancellationToken);

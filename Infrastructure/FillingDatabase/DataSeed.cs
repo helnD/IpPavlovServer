@@ -12,14 +12,17 @@ namespace Infrastructure.FillingDatabase
         private readonly PartnersDataSeed _partnersDataSeed;
         private readonly ProductsDataSeed _productsDataSeed;
         private readonly CertificatesDataSeed _certificatesDataSeed;
+        private readonly RepresentativesDataSeed _representativesDataSeed;
 
         public DataSeed(CategoriesDataSeed categoriesDataSeed, PartnersDataSeed partnersDataSeed,
-            ProductsDataSeed productsDataSeed, CertificatesDataSeed certificatesDataSeed)
+            ProductsDataSeed productsDataSeed, CertificatesDataSeed certificatesDataSeed,
+            RepresentativesDataSeed representativesDataSeed)
         {
             _categoriesDataSeed = categoriesDataSeed;
             _partnersDataSeed = partnersDataSeed;
             _productsDataSeed = productsDataSeed;
             _certificatesDataSeed = certificatesDataSeed;
+            _representativesDataSeed = representativesDataSeed;
         }
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace Infrastructure.FillingDatabase
             await _categoriesDataSeed.SeedCategories(cancellationToken);
             await _partnersDataSeed.SeedPartners(cancellationToken);
             await _productsDataSeed.SeedProducts(cancellationToken);
+            await _representativesDataSeed.SeedPartners(cancellationToken);
         }
     }
 }
