@@ -43,6 +43,9 @@ namespace Infrastructure.DataAccess
             base.OnModelCreating(builder);
         }
 
+        /// <inheritdoc/>
+        public DbSet<T> Entity<T>() where T : class, new() => Set<T>();
+
         /// <inheritdoc cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {

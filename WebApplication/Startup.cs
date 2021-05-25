@@ -58,6 +58,8 @@ namespace WebApplication
             services.AddTransient<CertificatesDataSeed>();
             services.AddTransient<ProductsDataSeed>();
             services.AddTransient<PartnersDataSeed>();
+            services.AddTransient<RepresentativesDataSeed>();
+            services.AddTransient(typeof(XmlSeeder<>), typeof(XmlSeeder<>));
             services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
 
             services.AddTransient<Infrastructure.Abstractions.Unidecode>(_ => str => str.Unidecode());

@@ -47,6 +47,12 @@ namespace Infrastructure.Abstractions
         public DbSet<SalesRepresentative> SalesRepresentatives { get; }
 
         /// <summary>
+        /// Returns entity set by passed type.
+        /// </summary>
+        /// <typeparam name="T">Type of set.</typeparam>
+        public DbSet<T> Entity<T>() where T : class, new();
+
+        /// <summary>
         /// Saves changes.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
