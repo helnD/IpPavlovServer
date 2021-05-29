@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<representatives type="SalesRepresentatives">
+    <representative
+        firstName="Александр"
+        lastName="Гребенков"
+        middleName="Владимирович"
+        phone="79320438248"
+        region="Октябрьский район"
+        startOfWork="9:00"
+        endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр 2"
+            lastName="Гребенков 2"
+            middleName="Владимирович 2"
+            phone="79320438242"
+            region="Октябрьский район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр"
+            lastName="Гребенков"
+            middleName="Владимирович"
+            phone="79320438248"
+            region="Свердловский район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр"
+            lastName="Гребенков"
+            middleName="Владимирович"
+            phone="79320438248"
+            region="Железнодорожный район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр"
+            lastName="Гребенков"
+            middleName="Владимирович"
+            phone="79320438248"
+            region="Центральный район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр"
+            lastName="Гребенков"
+            middleName="Владимирович"
+            phone="79320438248"
+            region="Советский район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр"
+            lastName="Гребенков"
+            middleName="Владимирович"
+            phone="79320438248"
+            region="Ленинский район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+    <representative
+            firstName="Александр"
+            lastName="Гребенков"
+            middleName="Владимирович"
+            phone="79320438248"
+            region="Кировский район"
+            startOfWork="9:00"
+            endOfWork="19:00"
+    />
+</representatives>

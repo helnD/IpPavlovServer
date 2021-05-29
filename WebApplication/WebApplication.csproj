@@ -176,6 +176,14 @@
       <EmbeddedResource Include="Images\Categories\water.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="Setup\Database\SalesRepresentatives.xml" />
+      <EmbeddedResource Include="Setup\Database\SalesRepresentatives.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Images\SalesRerpesentatives" />
     </ItemGroup>
 
     

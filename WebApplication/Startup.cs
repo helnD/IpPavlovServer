@@ -53,11 +53,10 @@ namespace WebApplication
             services.AddScoped<IDbContext>(serviceProvider => serviceProvider.GetRequiredService<AppDbContext>());
             services.AddAsyncInitializer<DatabaseInitializer>();
             services.AddTransient<DataSeed>();
-
-            services.AddTransient<CategoriesDataSeed>();
-            services.AddTransient<CertificatesDataSeed>();
             services.AddTransient<ProductsDataSeed>();
-            services.AddTransient<PartnersDataSeed>();
+            services.AddTransient<XmlSeederFacade>();
+            services.AddTransient(typeof(XmlSeeder<>), typeof(XmlSeeder<>));
+
             services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
 
             services.AddTransient<Infrastructure.Abstractions.Unidecode>(_ => str => str.Unidecode());

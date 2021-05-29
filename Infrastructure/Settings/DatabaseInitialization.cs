@@ -19,5 +19,10 @@
         /// Path to file with certificates description.
         /// </summary>
         public string CertificatesFile { get; init; }
+
+        /// <summary>
+        /// Path to file with sales representatives description.
+        /// </summary>
+        public string RepresentativesFile { get; init; }
     }
 }
