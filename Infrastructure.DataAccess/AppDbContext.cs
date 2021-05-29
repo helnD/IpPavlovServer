@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using Infrastructure.Abstractions;
@@ -28,6 +29,9 @@ namespace Infrastructure.DataAccess
 
         /// <inheritdoc/>
         public DbSet<SalesRepresentative> SalesRepresentatives { get; init; }
+
+        /// <inheritdoc/>
+        public DbSet<Question> Questions { get; init; }
 
         /// <summary>
         /// Initializes <see cref="AppDbContext"/>.
