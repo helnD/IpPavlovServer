@@ -90,12 +90,14 @@ namespace Infrastructure.FillingDatabase
 
             var name = partnerNode.Attribute("name")?.Value;
             var iconName = partnerNode.Attribute("icon")?.Value;
+            var link = partnerNode.Attribute("link")?.Value;
             var description = partnerNode.Descendants(descriptionName).First().Value.Trim();
 
             return new Partner
             {
                 Name = name,
                 Description = description,
+                Link = link,
                 Image = new Image
                 {
                     Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Partners, iconName)

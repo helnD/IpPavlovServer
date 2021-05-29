@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <partners type="Partner">
-    <partner name="Медведь любимый" icon="ml-best.svg">
+    <partner name="Медведь любимый" icon="ml-best.svg" link="http://www.ml-best.com/">
         <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </description>
     </partner>
-    <partner name="Ideal" icon="ideal.png">
+    <partner name="Ideal" icon="ideal.png" link="https://www.ideal-eda.ru/">
         <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </description>
     </partner>
-    <partner name="Барко" icon="barko.jpg">
+    <partner name="Барко" icon="barko.jpg" link="https://www.barko.ru/">
         <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </description>
     </partner>
-    <partner name="Золотая семечка" icon="golden-seed.jpg">
+    <partner name="Золотая семечка" icon="golden-seed.jpg" link="https://www.barko.ru/">
         <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </description>
     </partner>
-    <partner name="Ролтон" icon="rolton.jpg">
+    <partner name="Ролтон" icon="rolton.jpg" link="https://www.goldenseed.ru">
         <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </description>
