@@ -23,6 +23,11 @@ namespace UseCases.Products.GetProducts.Dtos
         public string Description { get; init; }
 
         /// <summary>
+        /// Link to site of partner.
+        /// </summary>
+        public string Link { get; init; }
+
+        /// <summary>
         /// Logo of partner.
         /// </summary>
         public Image Image { get; init; }
