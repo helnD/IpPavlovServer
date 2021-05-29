@@ -126,8 +126,8 @@ namespace Infrastructure.Email
                 Body = bodyBuilder.ToMessageBody()
             };
 
-            message.From.Add(new MailboxAddress("ИП Павлов", _configuration.Login));
-            message.To.Add(new MailboxAddress(mailInformation.Name, mailInformation.Email));
+            message.From.Add(new MailboxAddress("ИП Павлов | Сайт", _configuration.Login));
+            message.To.Add(new MailboxAddress(mailInformation.Name, _configuration.Login));
 
             return message;
         }
