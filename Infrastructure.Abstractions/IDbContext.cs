@@ -47,6 +47,11 @@ namespace Infrastructure.Abstractions
         public DbSet<SalesRepresentative> SalesRepresentatives { get; }
 
         /// <summary>
+        /// Questions set.
+        /// </summary>
+        public DbSet<Question> Questions { get; }
+
+        /// <summary>
         /// Returns entity set by passed type.
         /// </summary>
         /// <typeparam name="T">Type of set.</typeparam>

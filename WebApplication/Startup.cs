@@ -1,6 +1,7 @@
 using Infrastructure;
 using Infrastructure.Abstractions;
 using Infrastructure.DataAccess;
+using Infrastructure.Email;
 using Infrastructure.FillingDatabase;
 using Infrastructure.Settings;
 using MediatR;
@@ -55,6 +56,7 @@ namespace WebApplication
             services.AddTransient<DataSeed>();
             services.AddTransient<ProductsDataSeed>();
             services.AddTransient<XmlSeederFacade>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient(typeof(XmlSeeder<>), typeof(XmlSeeder<>));
 
             services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
@@ -64,6 +66,7 @@ namespace WebApplication
             services.Configure<DatabaseInitialization>(Configuration.GetSection("DatabaseInitialization"));
             services.Configure<ImagesSettings>(Configuration.GetSection("Resources:Images"));
             services.Configure<FilesSettings>(Configuration.GetSection("Resources:Files"));
+            services.Configure<SmtpConfiguration>(Configuration.GetSection("SmtpConfiguration"));
 
             services.AddMediatR(typeof(GetLeadersQuery).Assembly);
 
