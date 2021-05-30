@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <partners type="Partner">
-    <partner name="Медведь любимый" icon="ml-best.svg" link="http://www.ml-best.com/">
+    <partner name="Медведь любимый" icon="ml-best.png" link="http://www.ml-best.com/">
         <description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </description>

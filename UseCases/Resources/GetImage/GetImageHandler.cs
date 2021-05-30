@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Infrastructure;
 using Infrastructure.Abstractions;
+using Infrastructure.Settings;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace UseCases.Resources.GetImage
 {
@@ -15,10 +17,14 @@ namespace UseCases.Resources.GetImage
     public class GetImageHandler : IRequestHandler<GetImageQuery, FileStream>
     {
         private readonly IDbContext _context;
+        private readonly ImagesSettings _imagesSettings;
+        private readonly Locker _locker;
 
-        public GetImageHandler(IDbContext context)
+        public GetImageHandler(IDbContext context, IOptions<ImagesSettings> imagesSettings, Locker locker)
         {
             _context = context;
+            _locker = locker;
+            _imagesSettings = imagesSettings.Value;
         }
 
         /// <summary>
@@ -36,7 +42,18 @@ namespace UseCases.Resources.GetImage
                 throw new ArgumentException($"Image with id {request.ImageId} not found");
             }
 
-            return new FileStream(requiredImage.Path, FileMode.Open, FileAccess.Read);
+            var fileName = requiredImage.Path;
+
+            if (request.Size.ToUpper() == "MINI")
+            {
+                var folderPath = Path.GetDirectoryName(requiredImage.Path);
+                fileName = Path.Combine(folderPath, _imagesSettings.MiniPrefix + requiredImage.Name);
+            }
+
+            lock (_locker)
+            {
+                return new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            }
         }
     }
 }

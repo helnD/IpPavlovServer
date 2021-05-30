@@ -21,16 +21,20 @@ namespace Infrastructure.FillingDatabase
         private readonly ProductsDataSeed _productsDataSeed;
         private readonly DatabaseInitialization _initializationSettings;
         private readonly ImagesSettings _imagesSettings;
+        private readonly IImageResizer _imageResizer;
         private readonly Unidecode _unidecode;
 
+        private const short Threshold = 200;
+
         public DataSeed(XmlSeederFacade xmlSeederFacade, IOptions<DatabaseInitialization> initializationSettings,
-            IOptions<ImagesSettings> imagesSettings, Unidecode unidecode, ProductsDataSeed productsDataSeed)
+            IOptions<ImagesSettings> imagesSettings, Unidecode unidecode, ProductsDataSeed productsDataSeed, IImageResizer imageResizer)
         {
             _xmlSeederFacade = xmlSeederFacade;
             _initializationSettings = initializationSettings.Value;
             _imagesSettings = imagesSettings.Value;
             _unidecode = unidecode;
             _productsDataSeed = productsDataSeed;
+            _imageResizer = imageResizer;
         }
 
         /// <summary>
@@ -74,6 +78,9 @@ namespace Infrastructure.FillingDatabase
             var imageName = certificateNode.Attribute("image")?.Value;
             var description = certificateNode.Descendants(descriptionName).First().Value.Trim();
 
+            var task = CreateMini(Path.Combine(_imagesSettings.Root, _imagesSettings.Certificates), imageName);
+            task.Wait();
+
             return new Certificate
             {
                 Description = description,
@@ -92,6 +99,9 @@ namespace Infrastructure.FillingDatabase
             var iconName = partnerNode.Attribute("icon")?.Value;
             var link = partnerNode.Attribute("link")?.Value;
             var description = partnerNode.Descendants(descriptionName).First().Value.Trim();
+
+            var task = CreateMini(Path.Combine(_imagesSettings.Root, _imagesSettings.Partners), iconName);
+            task.Wait();
 
             return new Partner
             {
@@ -125,6 +135,16 @@ namespace Infrastructure.FillingDatabase
                 StartOfWork = TimeSpan.Parse(start),
                 EndOfWork = TimeSpan.Parse(end)
             };
+        }
+
+        private async Task CreateMini(string root, string name)
+        {
+            await using var image = new FileStream(Path.Combine(root, name), FileMode.Open);
+            await using var resizedImage = await _imageResizer.Reduce(image, Threshold, default);
+
+            var miniFilename = Path.Combine(root, _imagesSettings.MiniPrefix + name);
+            await using var mimiImage = File.Create(miniFilename);
+            await resizedImage.CopyToAsync(mimiImage);
         }
     }
 }

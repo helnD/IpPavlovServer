@@ -14,5 +14,10 @@ namespace UseCases.Resources.GetImage
         /// </summary>
         [Required]
         public int ImageId { get; init; }
+
+        /// <summary>
+        /// Size type of image.
+        /// </summary>
+        public string Size { get; init; } = "normal";
     }
 }

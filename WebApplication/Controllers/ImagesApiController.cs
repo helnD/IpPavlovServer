@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +25,7 @@ namespace WebApplication.Controllers
         /// <summary>
         /// Download image by id and image type.
         /// </summary>
-        [HttpGet("{imageId}")]
+        [HttpGet("{imageId}/{size=normal}")]
         public async Task<IActionResult> DownloadImage([FromRoute]GetImageQuery query, CancellationToken cancellationToken)
         {
             var image = await _mediator.Send(query, cancellationToken);

@@ -9,6 +9,8 @@ COPY Domain/*.csproj ./Domain/
 COPY Infrastructure/*.csproj ./Infrastructure/
 COPY Infrastructure.Abstractions/*.csproj ./Infrastructure.Abstractions/
 COPY Infrastructure.DataAccess/*.csproj ./Infrastructure.DataAccess/
+COPY Infrastructure.Email/*.csproj ./Infrastructure.Email/
+COPY Infrastructure.Images/*.csproj ./Infrastructure.Images/
 COPY UseCases/*.csproj ./UseCases/
 RUN dotnet restore WebApplication/WebApplication.csproj
 

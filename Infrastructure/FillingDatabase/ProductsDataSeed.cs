@@ -24,6 +24,7 @@ namespace Infrastructure.FillingDatabase
         private readonly ILogger<ProductsDataSeed> _logger;
         private readonly ImagesSettings _imagesSettings;
         private readonly IList<string> _availableImages;
+        private readonly IImageResizer _imageResizer;
 
         private const int ProductNumber = 0;
         private const int ProductCode = 1;
@@ -33,12 +34,15 @@ namespace Infrastructure.FillingDatabase
         private const int Category = 10;
         private const int Producer = 11;
 
+        private const int Threshold = 200;
+
         public ProductsDataSeed(IExcelReader excelReader, IDbContext context, IOptions<ImagesSettings> imagesSettings,
-            ILogger<ProductsDataSeed> logger)
+            ILogger<ProductsDataSeed> logger, IImageResizer imageResizer)
         {
             _excelReader = excelReader;
             _context = context;
             _logger = logger;
+            _imageResizer = imageResizer;
             _imagesSettings = imagesSettings.Value;
 
             var imagesFolder = Path.Combine(imagesSettings.Value.Root, imagesSettings.Value.Products);
@@ -79,6 +83,12 @@ namespace Infrastructure.FillingDatabase
             }
 
             await _context.SaveChangesAsync(cancellationToken);
+
+            foreach (var image in _availableImages)
+            {
+                var imageName = Path.GetFileName(image);
+                await CreateMini(Path.Combine(_imagesSettings.Root, _imagesSettings.Products), imageName);
+            }
 
             _logger.LogInformation("Products initialization complete");
         }
@@ -127,6 +137,16 @@ namespace Infrastructure.FillingDatabase
                     Path = pathToImage
                 }
             };
+        }
+
+        private async Task CreateMini(string root, string name)
+        {
+            await using var image = new FileStream(Path.Combine(root, name), FileMode.Open);
+            await using var resizedImage = await _imageResizer.Reduce(image, Threshold, default);
+
+            var miniFilename = Path.Combine(root, _imagesSettings.MiniPrefix + name);
+            await using var mimiImage = File.Create(miniFilename);
+            await resizedImage.CopyToAsync(mimiImage);
         }
     }
 }
