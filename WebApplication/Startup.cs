@@ -3,6 +3,7 @@ using Infrastructure.Abstractions;
 using Infrastructure.DataAccess;
 using Infrastructure.Email;
 using Infrastructure.FillingDatabase;
+using Infrastructure.Images;
 using Infrastructure.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -57,7 +58,9 @@ namespace WebApplication
             services.AddTransient<ProductsDataSeed>();
             services.AddTransient<XmlSeederFacade>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IImageResizer, ImageResizer>();
             services.AddTransient(typeof(XmlSeeder<>), typeof(XmlSeeder<>));
+            services.AddSingleton<Locker>();
 
             services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
 
