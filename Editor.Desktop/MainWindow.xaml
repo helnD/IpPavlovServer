@@ -10,21 +10,39 @@
         <TabControl>
             <TabItem>
                 <TabItem.Header>Продукты</TabItem.Header>
+                <TabItem.Content>
+                    <local:Products/>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Категории</TabItem.Header>
+                <TabItem.Content>
+                    <local:Categories/>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Сертификаты</TabItem.Header>
+                <TabItem.Content>
+                    <local:Certificates/>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Лидеры продаж</TabItem.Header>
+                <TabItem.Content>
+                    <local:SalesLeaders/>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Торговые представители</TabItem.Header>
+                <TabItem.Content>
+                    <local:SalesRepresentatives/>
+                </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Настройки</TabItem.Header>
+                <TabItem.Content>
+                    <local:Settings/>
+                </TabItem.Content>
             </TabItem>
         </TabControl>
     </Grid>
