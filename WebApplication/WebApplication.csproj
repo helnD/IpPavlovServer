@@ -27,6 +27,7 @@
       <ProjectReference Include="..\Infrastructure.Abstractions\Infrastructure.Abstractions.csproj" />
       <ProjectReference Include="..\Infrastructure.DataAccess\Infrastructure.DataAccess.csproj" />
       <ProjectReference Include="..\Infrastructure.Email\Infrastructure.Email.csproj" />
+      <ProjectReference Include="..\Infrastructure.Images\Infrastructure.Images.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\UseCases\UseCases.csproj" />
     </ItemGroup>
@@ -41,9 +42,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Partners\ml-best.svg" />
-      <EmbeddedResource Include="Images\Partners\ml-best.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
       <None Remove="Images\Products\ананасы.png" />
       <EmbeddedResource Include="Images\Products\ананасы.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -79,6 +77,10 @@
       </EmbeddedResource>
       <None Remove="Images\Partners\rolton.jpg" />
       <EmbeddedResource Include="Images\Partners\rolton.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Images\Partners\ml-best.png" />
+      <EmbeddedResource Include="Images\Partners\ml-best.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Images\Certificates\cert1.jpg" />

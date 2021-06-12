@@ -10,14 +10,14 @@ namespace UseCases.Resources.GetImage
     public class GetImageQuery : IRequest<FileStream>
     {
         /// <summary>
-        /// Name of directory with images.
+        /// Id of image.
         /// </summary>
-        /// <example>Categories</example>
-        /// <example>Products</example>
         [Required]
-        public string Type { get; init; } = "Products";
+        public int ImageId { get; init; }
 
-        [Required]
-        public int Id { get; init; }
+        /// <summary>
+        /// Size type of image.
+        /// </summary>
+        public string Size { get; init; } = "normal";
     }
 }
