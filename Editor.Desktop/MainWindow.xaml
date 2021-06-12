@@ -1,0 +1,49 @@
+﻿<Window x:Class="Editor.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Editor.Desktop"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>Продукты</TabItem.Header>
+                <TabItem.Content>
+                    <local:Products/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Категории</TabItem.Header>
+                <TabItem.Content>
+                    <local:Categories/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Сертификаты</TabItem.Header>
+                <TabItem.Content>
+                    <local:Certificates/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Лидеры продаж</TabItem.Header>
+                <TabItem.Content>
+                    <local:SalesLeaders/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Торговые представители</TabItem.Header>
+                <TabItem.Content>
+                    <local:SalesRepresentatives/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Настройки</TabItem.Header>
+                <TabItem.Content>
+                    <local:Settings/>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
