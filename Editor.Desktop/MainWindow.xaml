@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>Продукты</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Категории</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Сертификаты</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Лидеры продаж</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Торговые представители</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Настройки</TabItem.Header>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
