@@ -19,6 +19,7 @@ namespace UseCases.Resources.UploadImage
     public class UploadImageHandler : IRequestHandler<UploadImageCommand, int>
     {
         private readonly ImagesSettings _imagesSettings;
+        private readonly IImageResizer _imageResizer;
         private readonly IDbContext _context;
 
         /// <summary>
@@ -26,10 +27,13 @@ namespace UseCases.Resources.UploadImage
         /// </summary>
         /// <param name="imagesSettings">Image settings.</param>
         /// <param name="context">Database context.</param>
-        public UploadImageHandler(IOptions<ImagesSettings> imagesSettings, IDbContext context)
+        /// <param name="imageResizer">Image resizer.</param>
+        public UploadImageHandler(IOptions<ImagesSettings> imagesSettings, IDbContext context,
+            IImageResizer imageResizer)
         {
             _imagesSettings = imagesSettings.Value;
             _context = context;
+            _imageResizer = imageResizer;
         }
 
         /// <summary>
@@ -52,15 +56,37 @@ namespace UseCases.Resources.UploadImage
                 ? nameWithoutExtension + fileExtenstion
                 : $"{nameWithoutExtension}-{imagesNumberWithSameName + 1}{fileExtenstion}";
 
-            var imagePath = Path.Combine(useCasesRoot, imageFolder, imageName);
-            await using var imageFile = File.Create(imagePath, (int)request.ImageStream.Length, FileOptions.Asynchronous);
+            var imagePath = Path.Combine(imageFolder, imageName);
+            await using var imageFile = new FileStream(imagePath, FileMode.Create);
             await request.ImageStream.CopyToAsync(imageFile, cancellationToken);
 
-            var image = new Image { Path = imagePath };
+            await HandleMini(request.Type, imageFolder, imageName, imageFile, cancellationToken);
+
+            var image = new Image {Path = imagePath};
             await _context.Images.AddAsync(image, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
             return image.Id;
+        }
+
+        private async Task HandleMini(string type, string folder, string name, FileStream image,
+            CancellationToken cancellationToken)
+        {
+            if (type != "Certificates" && type != "Products")
+            {
+                return;
+            }
+
+            var filename = Path.GetFileNameWithoutExtension(name);
+            var extension = Path.GetExtension(name);
+
+            var miniFilename = _imagesSettings.MiniPrefix + filename + extension;
+            var miniFullname = Path.Combine(folder, miniFilename);
+
+            var miniImage = await _imageResizer.Reduce(image, 512, cancellationToken);
+            await using var miniFile = File.Create(miniFullname, (int) miniImage.Length, FileOptions.Asynchronous);
+            miniImage.Position = 0;
+            await miniImage.CopyToAsync(miniFile, cancellationToken);
         }
 
         private string GetImageFolder(string type)
@@ -74,7 +100,7 @@ namespace UseCases.Resources.UploadImage
                 throw new NotFoundException($"Image type {type} not found.");
             }
 
-            var currentFolder = (string)currentFolderField.GetValue(_imagesSettings);
+            var currentFolder = (string) currentFolderField.GetValue(_imagesSettings);
             return Path.Combine(_imagesSettings.Root, currentFolder);
         }
     }
