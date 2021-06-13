@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Resources.GetImage;
+using UseCases.Resources.UploadImage;
 
 namespace WebApplication.Controllers
 {
@@ -31,6 +34,25 @@ namespace WebApplication.Controllers
             var image = await _mediator.Send(query, cancellationToken);
             var extension = image.Name.Split('.').Last();
             return File(image, GetMimeType(extension));
+        }
+
+        /// <summary>
+        /// Upload new image to the system.
+        /// </summary>
+        /// <param name="image">Image file.</param>
+        /// <param name="type">Image type (folder).</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        [HttpPost]
+        public async Task<int> UploadImage([Required][FromForm]IFormFile image, [Required][FromQuery]string type,
+            CancellationToken cancellationToken)
+        {
+            var command = new UploadImageCommand
+            {
+                Name = image.FileName,
+                Type = type,
+                ImageStream = image.OpenReadStream()
+            };
+            return await _mediator.Send(command, cancellationToken);
         }
 
         private string GetMimeType(string extension) => extension switch

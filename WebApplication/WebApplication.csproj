@@ -185,10 +185,6 @@
       </EmbeddedResource>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Images\SalesRerpesentatives" />
-    </ItemGroup>
-
     
 
 </Project>
