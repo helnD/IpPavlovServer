@@ -11,31 +11,31 @@
             <TabItem>
                 <TabItem.Header>Продукты</TabItem.Header>
                 <TabItem.Content>
-                    <local:Products/>
+                    <ContentControl Name="Products"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Категории</TabItem.Header>
                 <TabItem.Content>
-                    <local:Categories/>
+                    <ContentControl Name="Categories"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Сертификаты</TabItem.Header>
                 <TabItem.Content>
-                    <local:Certificates/>
+                    <ContentControl Name="Certificates"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Лидеры продаж</TabItem.Header>
                 <TabItem.Content>
-                    <local:SalesLeaders/>
+                    <ContentControl Name="SalesLeaders"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Торговые представители</TabItem.Header>
                 <TabItem.Content>
-                    <local:SalesRepresentatives/>
+                    <ContentControl Name="SalesRepresentatives"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
