@@ -14,7 +14,9 @@
         <DataGrid
             ItemsSource="{Binding Certificates, IsAsync=True}"
             AutoGenerateColumns="False"
-            Margin="5">
+            Margin="5"
+            SelectedItem="{Binding SelectedCertificate}"
+            >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="10*" Header="ID" IsReadOnly="True" Binding="{Binding Id}"/>
@@ -22,5 +24,9 @@
                 <DataGridTextColumn Width="20*" Header="Изображение" Binding="{Binding Image.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Margin="5" Grid.Column="1">
+            <Label>Изображение сертификата</Label>
+            <Image Source="{Binding ImageUri}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

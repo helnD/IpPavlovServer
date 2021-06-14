@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using Infrastructure.Abstractions;
 using Infrastructure.DataAccess;
 using MediatR;
@@ -54,6 +52,7 @@ namespace Editor.Desktop
             //ViewModels
             services.AddTransient<CertificatesViewModel>();
 
+            // MediatR
             services.AddMediatR(typeof(GetCertificatesQuery));
         }
 
