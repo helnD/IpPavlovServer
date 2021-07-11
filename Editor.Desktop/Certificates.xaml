@@ -3,30 +3,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:ViewModels.Certificates;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:CertificatesViewModel}"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:calc="clr-namespace:CalcBinding;assembly=CalcBinding"
              xmlns:local="clr-namespace:Editor.Desktop"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Margin="20 30">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <DataGrid
-            ItemsSource="{Binding Certificates, IsAsync=True}"
-            AutoGenerateColumns="False"
-            Margin="5"
-            SelectedItem="{Binding SelectedCertificate}"
-            >
+        <DockPanel>
+            <DataGrid
+                DockPanel.Dock="Top"
+                ItemsSource="{Binding Model.TableContent, IsAsync=True}"
+                AutoGenerateColumns="False"
+                Margin="5"
+                SelectedItem="{Binding SelectedCertificate}"
+                AddingNewItem="DataGrid_OnAddingNewItem">
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="10*" Header="ID" IsReadOnly="True" Binding="{Binding Id}"/>
-                <DataGridTextColumn Width="70*" Header="Описание" Binding="{Binding Description}"/>
-                <DataGridTextColumn Width="20*" Header="Изображение" Binding="{Binding Image.Name}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Margin="5" Grid.Column="1">
-            <Label>Изображение сертификата</Label>
-            <Image Source="{Binding ImageUri}"/>
-        </StackPanel>
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="5*"
+                        Header="#"
+                        IsReadOnly="True"
+                        Binding="{Binding Id}" />
+                    <DataGridTextColumn
+                        Width="70*"
+                        Header="Описание"
+                        Binding="{Binding Description}" />
+                    <DataGridTemplateColumn
+                        Width="25*"
+                        IsReadOnly="True"
+                        Header="Изображение">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                        Command="{Binding DataContext.ChooseImageCommand, RelativeSource={RelativeSource  Mode=FindAncestor, AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding Image}"
+                                        Style="{StaticResource IconButton}"
+                                        Margin="5 0"
+                                        Content="{md:PackIcon Edit}" />
+                                    <TextBlock Text="{Binding Image.Name, Mode=OneWay}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                DockPanel.Dock="Bottom">
+                <Button
+                    VerticalAlignment="Bottom"
+                    Width="250"
+                    Margin="5 0"
+                    Content="Сохранить изменения"
+                    Command="{Binding SaveCommand}" />
+                <Button
+                    VerticalAlignment="Bottom"
+                    Style="{StaticResource SecondaryButton}"
+                    Content="Отменить изменения"
+                    Command="{Binding UndoChangesCommand}"/>
+            </StackPanel>
+        </DockPanel>
+        <Grid
+            Margin="5"
+            Grid.Column="1">
+            <Grid>
+                <md:Card Visibility="{calc:Binding 'ImageUri == null'}">
+                    <TextBlock
+                        Width="250"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="После выбора сертификата здесь появится изображение"
+                        TextWrapping="Wrap"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        FontSize="20" />
+                </md:Card>
+                <md:Card
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Visibility="{calc:Binding 'ImageUri != null'}">
+                    <Image Source="{Binding ImageUri}" />
+                </md:Card>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

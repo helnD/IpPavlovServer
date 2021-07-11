@@ -5,37 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Editor.Desktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        Background="#fafafa"
+        Title="MainWindow">
     <Grid>
         <TabControl>
             <TabItem>
                 <TabItem.Header>Продукты</TabItem.Header>
                 <TabItem.Content>
-                    <ContentControl Name="Products"/>
+                    <ContentControl
+                        Margin="20 80"
+                        Name="Products"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Категории</TabItem.Header>
                 <TabItem.Content>
-                    <ContentControl Name="Categories"/>
+                    <ContentControl
+                        Margin="80 20"
+                        Name="Categories"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Сертификаты</TabItem.Header>
                 <TabItem.Content>
-                    <ContentControl Name="Certificates"/>
+                    <ContentControl
+                        Background="#fafafa"
+                        Name="Certificates"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Лидеры продаж</TabItem.Header>
                 <TabItem.Content>
-                    <ContentControl Name="SalesLeaders"/>
+                    <ContentControl
+                        Margin="80 20"
+                        Name="SalesLeaders"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Торговые представители</TabItem.Header>
                 <TabItem.Content>
-                    <ContentControl Name="SalesRepresentatives"/>
+                    <ContentControl
+                        Margin="80 20"
+                        Name="SalesRepresentatives"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>

@@ -13,11 +13,16 @@
         /// <summary>
         /// Certificate description.
         /// </summary>
-        public string Description { get; init; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Image of certificate.
         /// </summary>
-        public Image Image { get; init; }
+        public Image Image { get; set; }
+
+        /// <summary>
+        /// Image id.
+        /// </summary>
+        public int ImageId { get; init; }
     }
 }
