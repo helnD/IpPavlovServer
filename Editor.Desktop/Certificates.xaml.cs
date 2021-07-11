@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using ViewModels;
+using ViewModels.Certificates;
 
 namespace Editor.Desktop
 {
@@ -13,6 +14,11 @@ namespace Editor.Desktop
         {
             DataContext = viewModel;
             InitializeComponent();
+        }
+
+        private void DataGrid_OnAddingNewItem(object? sender, AddingNewItemEventArgs e)
+        {
+            ;
         }
     }
 }

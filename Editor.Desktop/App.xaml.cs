@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Windows;
+using Editor.Desktop.Services;
 using Infrastructure.Abstractions;
 using Infrastructure.DataAccess;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using UseCases.Certificates.GetCertificates;
 using ViewModels;
+using ViewModels.Certificates;
+using ViewModels.Certificates.Models;
 
 namespace Editor.Desktop
 {
@@ -40,6 +44,12 @@ namespace Editor.Desktop
                 async action => await Dispatcher.InvokeAsync(action)
             );
 
+            // File dialog.
+            services.AddTransient<IFileDialog, WinFileDialog>();
+
+            // Image API.
+            services.AddTransient<IImageApi, ImageApi>();
+
             // Controls.
             services.AddSingleton<MainWindow>();
             services.AddTransient<Certificates>();
@@ -54,6 +64,9 @@ namespace Editor.Desktop
 
             // MediatR
             services.AddMediatR(typeof(GetCertificatesQuery));
+
+            // Automapper.
+            services.AddAutoMapper(typeof(GetCertificatesQuery), typeof(CertificatesModel));
         }
 
         private void OnStartup(object sender, StartupEventArgs args)
