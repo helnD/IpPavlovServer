@@ -15,6 +15,7 @@ namespace Editor.Desktop
             SalesRepresentatives.Content = tabControlsFacade.Representatives;
             Products.Content = tabControlsFacade.Products;
             Certificates.Content = tabControlsFacade.Certificates;
+            Partners.Content = tabControlsFacade.Partners;
         }
     }
 }

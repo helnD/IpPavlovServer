@@ -12,8 +12,10 @@ namespace Editor.Desktop
             Products products,
             SalesLeaders salesLeaders,
             SalesRepresentatives representatives,
+            Partners partners,
             Categories categories)
         {
+            Partners = partners;
             Certificates = certificates;
             Products = products;
             SalesLeaders = salesLeaders;
@@ -45,5 +47,7 @@ namespace Editor.Desktop
         /// Categories = tab control.
         /// </summary>
         internal Categories Categories { get; }
+
+        internal Partners Partners { get; }
     }
 }

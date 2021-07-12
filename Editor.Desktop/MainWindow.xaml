@@ -25,6 +25,12 @@
                 </TabItem.Content>
             </TabItem>
             <TabItem>
+                <TabItem.Header>Партнеры</TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl Name="Partners"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
                 <TabItem.Header>Сертификаты</TabItem.Header>
                 <TabItem.Content>
                     <ContentControl
