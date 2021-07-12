@@ -7,7 +7,6 @@ using Infrastructure.Abstractions;
 using MediatR;
 using UseCases.Categories.GetCategories;
 using UseCases.Categories.SaveCategories;
-using UseCases.Certificates.SaveCertificates;
 using ViewModels.Categories.Models;
 using ViewModels.Certificates.Models;
 using ViewModels.Common;
@@ -102,6 +101,7 @@ namespace ViewModels.Categories
                 return;
             }
 
+            model.IsUpdated = true;
             model.Id = default;
             model.Path = fileName;
             ImageUri = fileName;
