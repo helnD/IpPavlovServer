@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain;
+using UseCases.Partners.SavePartnersCommand;
 using ViewModels.Partners.Models;
 
 namespace ViewModels.Partners
@@ -9,6 +10,9 @@ namespace ViewModels.Partners
         public MappingProfile()
         {
             CreateMap<Partner, PartnerModel>();
+
+            CreateMap<PartnersModel, SavePartnersCommand>();
+            CreateMap<PartnerModel, PartnerDto>();
         }
     }
 }

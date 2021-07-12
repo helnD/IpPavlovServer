@@ -1,9 +1,8 @@
-﻿using ViewModels.Certificates.Models;
-using ViewModels.Common;
+﻿using UseCases.Certificates.SaveCertificates;
 
-namespace ViewModels.Partners.Models
+namespace UseCases.Partners.SavePartnersCommand
 {
-    public class PartnerModel : Notifier
+    public class PartnerDto
     {
         /// <summary>
         /// Identifier.
@@ -13,16 +12,16 @@ namespace ViewModels.Partners.Models
         /// <summary>
         /// Partner name.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         /// <summary>
         /// Partner description.
         /// </summary>
-        public string Description { get; set; }
+        public string Description { get; init; }
 
         /// <summary>
         /// Logo of partner.
         /// </summary>
-        public ImageModel Image { get; set; } = new();
+        public ImageDto Image { get; init; }
     }
 }

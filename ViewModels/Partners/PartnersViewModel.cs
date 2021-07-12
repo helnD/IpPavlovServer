@@ -7,6 +7,7 @@ using Infrastructure.Abstractions;
 using MediatR;
 using UseCases.Certificates.SaveCertificates;
 using UseCases.Partners.GetPartners;
+using UseCases.Partners.SavePartnersCommand;
 using ViewModels.Certificates.Models;
 using ViewModels.Common;
 using ViewModels.Common.ViewModel;
@@ -70,7 +71,7 @@ namespace ViewModels.Partners
 
         protected override async Task Save()
         {
-            var command = _mapper.Map<SaveCertificatesCommand>(Model);
+            var command = _mapper.Map<SavePartnersCommand>(Model);
             await _mediator.Send(command);
             await _initContext(async () => await InitializeCertificates(default));
         }
