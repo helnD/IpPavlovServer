@@ -1,4 +1,6 @@
-﻿namespace Editor.Desktop
+﻿using Editor.Desktop.Views.Common;
+
+namespace Editor.Desktop
 {
     /// <summary>
     /// Class for providing all  tab controls from main window.

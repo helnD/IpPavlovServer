@@ -2,7 +2,7 @@
 
 namespace ViewModels.Common.ViewModel
 {
-    public abstract class EditableTableViewModel<M, T> : Notifier where M : EditableTableModel<T>
+    public abstract class EditableTableViewModel<M, T> : BaseViewModel where M : EditableTableModel<T>
         where T : Notifier
     {
         protected EditableTableViewModel()

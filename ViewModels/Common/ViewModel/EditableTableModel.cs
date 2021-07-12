@@ -33,7 +33,10 @@ namespace ViewModels.Common.ViewModel
             TableContent.CollectionChanged += ContentOnCollectionChanged;
             foreach (var item in TableContent)
             {
-                item.PropertyChanged += ContentOnPropertyChanged;
+                item.PropertyChanged += (_, __) =>
+                {
+                    ContentOnPropertyChanged(item);
+                };
                 SubscribeOnPropertyChanged(item);
             }
         }
@@ -58,7 +61,7 @@ namespace ViewModels.Common.ViewModel
             }
         }
 
-        private void SubscribeOnPropertyChanged(object item)
+        private void SubscribeOnPropertyChanged(T item)
         {
             var properties = item.GetType().GetProperties();
 
@@ -67,18 +70,16 @@ namespace ViewModels.Common.ViewModel
                 var propertyValue = property.GetValue(item);
                 if (propertyValue is Notifier notifier)
                 {
-                    notifier.PropertyChanged += ContentOnPropertyChanged;
+                    notifier.PropertyChanged += (_, __) =>
+                    {
+                        ContentOnPropertyChanged(item);
+                    };
                 }
             }
         }
 
-        private void ContentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ContentOnPropertyChanged(T item)
         {
-            if (sender is not T item)
-            {
-                return;
-            }
-
             if (Updated.Contains(item))
             {
                 return;

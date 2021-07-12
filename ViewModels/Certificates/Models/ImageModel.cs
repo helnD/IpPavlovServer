@@ -18,5 +18,7 @@ namespace ViewModels.Certificates.Models
         /// Path to image.
         /// </summary>
         public string Path { get; set; }
+
+        public bool IsUpdated { get; set; }
     }
 }
