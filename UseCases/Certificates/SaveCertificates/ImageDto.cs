@@ -14,5 +14,7 @@
         /// Path to image.
         /// </summary>
         public string Path { get; init; }
+
+        public bool IsUpdated { get; init; }
     }
 }

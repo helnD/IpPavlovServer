@@ -62,6 +62,10 @@ namespace UseCases.Certificates.SaveCertificates
         {
             foreach (var sourceCertificate in source)
             {
+                if (!sourceCertificate.Image.IsUpdated)
+                {
+                    continue;
+                }
                 var imageId = await _imageApi.UploadImageAsync(sourceCertificate.Image.Path, "Certificates", cancellationToken);
                 var imageFromDatabase = await _context.Images.FirstAsync(image => image.Id == imageId, cancellationToken);
 

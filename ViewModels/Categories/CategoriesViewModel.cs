@@ -5,74 +5,76 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Infrastructure.Abstractions;
 using MediatR;
-using UseCases.Certificates.GetCertificates;
+using UseCases.Categories.GetCategories;
+using UseCases.Categories.SaveCategories;
 using UseCases.Certificates.SaveCertificates;
+using ViewModels.Categories.Models;
 using ViewModels.Certificates.Models;
 using ViewModels.Common;
 using ViewModels.Common.ViewModel;
 
-namespace ViewModels.Certificates
+namespace ViewModels.Categories
 {
     /// <summary>
     /// View model for certificates.
     /// </summary>
-    public class CertificatesViewModel : EditableTableViewModel<CertificatesModel, CertificateModel>
+    public class CategoriesViewModel : EditableTableViewModel<CategoriesModel, CategoryModel>
     {
         private readonly IMediator _mediator;
         private readonly InvokeAsynchronously _initContext;
         private readonly IMapper _mapper;
         private readonly IFileDialog _fileDialog;
 
-        private CertificateModel _selectedCertificate;
+        private CategoryModel _selectedCategory;
 
-        public CertificatesViewModel(IMediator mediator, InvokeAsynchronously initContext, IMapper mapper, IFileDialog fileDialog)
+        public CategoriesViewModel(IMediator mediator, InvokeAsynchronously initContext, IMapper mapper, IFileDialog fileDialog)
         {
             _mediator = mediator;
             _initContext = initContext;
             _mapper = mapper;
             _fileDialog = fileDialog;
-            Model = new CertificatesModel();
+            Model = new CategoriesModel();
 
             ChooseImageCommand = new RelayCommand<ImageModel>(ChooseFile);
         }
 
-        public RelayCommand<ImageModel> ChooseImageCommand { get; }
+        public string ImageUri { get; set; }
 
-        public CertificateModel SelectedCertificate
+        public CategoryModel SelectedCategory
         {
-            get => _selectedCertificate;
+            get => _selectedCategory;
             set
             {
                 if (value is not null)
                 {
-                    SetImage(value.Image);
+                    SetImage(value.Icon);
                 }
 
-                _selectedCertificate = value;
+                _selectedCategory = value;
             }
         }
 
-        public string ImageUri { get; set; } = "init";
+        public RelayCommand<ImageModel> ChooseImageCommand { get; }
 
         private async Task InitializeCertificates(CancellationToken cancellationToken)
         {
-            var certificates = await _mediator.Send(new GetCertificatesQuery(), cancellationToken);
-            var mappedCertificates = _mapper.Map<IEnumerable<CertificateModel>>(certificates);
-            Model = new CertificatesModel
+            var categories = await _mediator.Send(new GetAllCategoriesQuery(), cancellationToken);
+            var mappedCategories = _mapper.Map<IEnumerable<CategoryModel>>(categories);
+            Model = new CategoriesModel
             {
-                TableContent = new ObservableCollection<CertificateModel>(mappedCertificates)
+                TableContent = new ObservableCollection<CategoryModel>(mappedCategories)
             };
             ImageUri = null;
         }
 
         public override async Task LoadAsync()
         {
-            await _initContext(async () => await InitializeCertificates(default));
+            await InitializeCertificates(default);
         }
 
         protected override async Task Save()
         {
-            var command = _mapper.Map<SaveCertificatesCommand>(Model);
+            var command = _mapper.Map<SaveCategoriesCommand>(Model);
             await _mediator.Send(command);
             await _initContext(async () => await InitializeCertificates(default));
         }
@@ -102,7 +104,6 @@ namespace ViewModels.Certificates
 
             model.Id = default;
             model.Path = fileName;
-            model.IsUpdated = true;
             ImageUri = fileName;
         }
     }

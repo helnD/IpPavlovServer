@@ -21,9 +21,7 @@
             <TabItem>
                 <TabItem.Header>Категории</TabItem.Header>
                 <TabItem.Content>
-                    <ContentControl
-                        Margin="80 20"
-                        Name="Categories"/>
+                    <ContentControl Name="Categories"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>

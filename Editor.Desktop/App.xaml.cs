@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Editor.Desktop.Services;
+using Editor.Desktop.Views.Common;
 using Infrastructure.Abstractions;
 using Infrastructure.DataAccess;
 using MediatR;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using UseCases.Certificates.GetCertificates;
 using ViewModels;
+using ViewModels.Categories;
 using ViewModels.Certificates;
 using ViewModels.Certificates.Models;
 
@@ -32,12 +34,12 @@ namespace Editor.Desktop
         private void ConfigureServices(IServiceCollection services)
         {
             // Database.
+            services.AddTransient<IDbContext, AppDbContext>();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseNpgsql(
                     "Host=localhost;Port=5432;Database=IpPavlov;User Id=vladimir;Password=793b3243vova15");
             });
-            services.AddScoped<IDbContext>(serviceProvider => serviceProvider.GetRequiredService<AppDbContext>());
 
             // Dispatcher
             services.AddTransient<InvokeAsynchronously>(_ =>
@@ -61,6 +63,7 @@ namespace Editor.Desktop
 
             //ViewModels
             services.AddTransient<CertificatesViewModel>();
+            services.AddTransient<CategoriesViewModel>();
 
             // MediatR
             services.AddMediatR(typeof(GetCertificatesQuery));

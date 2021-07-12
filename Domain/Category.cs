@@ -30,6 +30,6 @@ namespace Domain
         /// <summary>
         /// Icon of category.
         /// </summary>
-        public Image Icon { get; init; }
+        public Image Icon { get; set; }
     }
 }
