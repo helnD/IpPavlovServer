@@ -35,6 +35,6 @@ namespace Domain
         /// <summary>
         /// Logo of partner.
         /// </summary>
-        public Image Image { get; init; }
+        public Image Image { get; set; }
     }
 }

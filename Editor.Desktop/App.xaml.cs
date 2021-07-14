@@ -13,6 +13,7 @@ using ViewModels;
 using ViewModels.Categories;
 using ViewModels.Certificates;
 using ViewModels.Certificates.Models;
+using ViewModels.Partners;
 
 namespace Editor.Desktop
 {
@@ -59,11 +60,13 @@ namespace Editor.Desktop
             services.AddTransient<SalesRepresentatives>();
             services.AddTransient<Products>();
             services.AddTransient<Categories>();
+            services.AddTransient<Partners>();
             services.AddTransient<TabControlsFacade>();
 
             //ViewModels
             services.AddTransient<CertificatesViewModel>();
             services.AddTransient<CategoriesViewModel>();
+            services.AddTransient<PartnersViewModel>();
 
             // MediatR
             services.AddMediatR(typeof(GetCertificatesQuery));
