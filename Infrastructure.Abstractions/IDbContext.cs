@@ -57,6 +57,11 @@ namespace Infrastructure.Abstractions
         public DbSet<Stock> Stocks { get; }
 
         /// <summary>
+        /// Cooperation requests.
+        /// </summary>
+        public DbSet<CooperationRequest> CooperationRequests { get; }
+
+        /// <summary>
         /// Returns entity set by passed type.
         /// </summary>
         /// <typeparam name="T">Type of set.</typeparam>
