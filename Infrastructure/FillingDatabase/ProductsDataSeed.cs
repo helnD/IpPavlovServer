@@ -60,8 +60,6 @@ namespace Infrastructure.FillingDatabase
                 return;
             }
 
-            var leadersCount = 0;
-
             while (!_excelReader.IsEnd)
             {
                 var row = _excelReader.NextRow();
@@ -74,13 +72,16 @@ namespace Infrastructure.FillingDatabase
 
                 var product = await CreateProduct(row, cancellationToken);
                 await _context.Products.AddAsync(product, cancellationToken);
-
-                if (leadersCount < 2)
-                {
-                    await _context.Leaders.AddAsync(new SalesLeader { Product = product }, cancellationToken);
-                    leadersCount++;
-                }
             }
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            var stockProducts = await _context.Products.Take(2).ToListAsync(cancellationToken);
+            await _context.Stocks.AddAsync(new ()
+            {
+                RelatedProducts = stockProducts,
+                Text = $"Купите один [{stockProducts[0].Id}:продукт] и получите [{stockProducts[1].Id}:второй] в подарок"
+            }, cancellationToken);
 
             await _context.SaveChangesAsync(cancellationToken);
 

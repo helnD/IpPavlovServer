@@ -52,6 +52,11 @@ namespace Infrastructure.Abstractions
         public DbSet<Question> Questions { get; }
 
         /// <summary>
+        /// Stocks set.
+        /// </summary>
+        public DbSet<Stock> Stocks { get; }
+
+        /// <summary>
         /// Returns entity set by passed type.
         /// </summary>
         /// <typeparam name="T">Type of set.</typeparam>
