@@ -26,6 +26,7 @@ namespace Infrastructure.Email
         private const string QuestionSubject = "Вопрос с сайта";
 
         private const string QuestionTemplate = "Question.html";
+        private const string CooperationRequestTemplate = "CooperationRequest.html";
 
         /// <summary>
         /// Constructor.
@@ -57,6 +58,26 @@ namespace Infrastructure.Email
             };
 
             await SendEmailByTemplate(QuestionTemplate, mailInformation, cancellationToken);
+        }
+
+        public async Task SendCooperationRequest(string name, string company, string email, CancellationToken cancellationToken)
+        {
+            var placeholders = new Dictionary<string, string>
+            {
+                { "USERNAME", name },
+                { "COMPANY", company },
+                { "EMAIL", email }
+            };
+
+            var mailInformation = new MailInformation
+            {
+                Name = name,
+                Email = email,
+                Subject = QuestionSubject,
+                Placeholders = placeholders
+            };
+
+            await SendEmailByTemplate(CooperationRequestTemplate, mailInformation, cancellationToken);
         }
 
         private async Task SendEmailByTemplate(string template, MailInformation mailInformation, CancellationToken cancellationToken)

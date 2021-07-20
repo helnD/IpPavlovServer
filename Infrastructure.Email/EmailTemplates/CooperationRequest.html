@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cooperation</title>
+    <style type="text/css">
+        .title, .message-text, .email {
+            font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 30px;
+        }
+
+        .message-text {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .email {
+            font-size: 16px;
+        }
+
+        .card-container {
+            width: 500px;
+            display: inline-block;
+            text-align: center;
+            background-color: #ececec;
+            padding: 16px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-wrapper {
+            width: 35%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="main-wrapper">
+    <div class="card-container">
+        <div class="title">
+            С вами хотят сотрудничать!
+        </div>
+        <p class="message-text">
+            {{USERNAME}} | {{COMPANY}}
+        </p>
+        <div class="email">Email: {{EMAIL}}</div>
+    </div>
+</div>
+</body>
+</html>

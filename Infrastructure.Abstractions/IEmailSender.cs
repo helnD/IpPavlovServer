@@ -16,5 +16,7 @@ namespace Infrastructure.Abstractions
         /// <param name="question">Question text.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         Task SendQuestionAsync(string name, string email, string question, CancellationToken cancellationToken);
+
+        Task SendCooperationRequest(string name, string company, string email, CancellationToken cancellationToken);
     }
 }

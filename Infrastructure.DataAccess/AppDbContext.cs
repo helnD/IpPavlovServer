@@ -36,6 +36,9 @@ namespace Infrastructure.DataAccess
         /// <inheritdoc/>
         public DbSet<Stock> Stocks { get; init; }
 
+        /// <inheritdoc/>
+        public DbSet<CooperationRequest> CooperationRequests { get; init; }
+
         /// <summary>
         /// Initializes <see cref="AppDbContext"/>.
         /// </summary>
