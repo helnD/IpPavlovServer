@@ -20,7 +20,7 @@ namespace Domain
         /// <summary>
         /// Path to image.
         /// </summary>
-        [MetaEntityAttr(ShowOnCreate = false)]
+        [MetaEntityAttr(ShowOnCreate = false, ShowOnEdit = false)]
         public string Path { get; init; }
     }
 }

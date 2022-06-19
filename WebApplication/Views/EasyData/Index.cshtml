@@ -15,7 +15,6 @@
         const mutationObserver = new MutationObserver(() => {
             if (window.location.href.includes('Image')) {
                 const imageInput = document.getElementById("image-input");
-                console.log(imageInput)
                 if (imageInput) {
                     return;
                 }
@@ -26,6 +25,20 @@
                 }
 
                 const formContent = modal.getElementsByClassName("kfrm-fields")[0]
+
+                const imageTypeSelect = document.createElement('select')
+                imageTypeSelect.className = "form-select"
+                imageTypeSelect.innerHTML = `
+                    <option value="Products">Продукт</option>
+                    <option value="Certificates">Сертификат</option>
+                    <option value="Categories">Категория</option>
+                    <option value="Partners">Партнер</option>
+                `
+                const imageTypeLabel = document.createElement('label')
+                imageTypeLabel.innerText = 'Назначение : '
+
+                formContent.appendChild(imageTypeLabel)
+                formContent.appendChild(imageTypeSelect)
 
                 const imageInputElement = document.createElement('div')
                 imageInputElement.innerHTML = '<input required type="file" class="form-control" id="image-input"/>'
@@ -46,7 +59,7 @@
 
                     let formData = new FormData()
                     formData.append("image", photo)
-                    fetch(`${window.location.origin}/api/v1/images?type=Products`, {method: "POST", body: formData})
+                    fetch(`${window.location.origin}/api/v1/images?type=${imageTypeSelect.value}`, {method: "POST", body: formData})
                         .then(() => {
                            closeButton.click()
                            window.location.reload()
