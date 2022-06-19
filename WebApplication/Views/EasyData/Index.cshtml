@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Entities";
+}
+<div id="EasyDataContainer"></div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.korzh.com/ed/1.4.3/easydata.min.css"/>
+    <script src="https://cdn.korzh.com/ed/1.4.3/easydata.min.js" type="text/javascript"></script>
+
+    <script>
+        window.addEventListener('load', function () {
+            new easydata.crud.EasyDataViewDispatcher().run()
+        });
+
+        const mutationObserver = new MutationObserver(() => {
+            if (window.location.href.includes('Image')) {
+                const imageInput = document.getElementById("image-input");
+                console.log(imageInput)
+                if (imageInput) {
+                    return;
+                }
+
+                const modal = document.getElementsByClassName("kdlg-modal-window")[0];
+                if (!modal) {
+                    return
+                }
+
+                const formContent = modal.getElementsByClassName("kfrm-fields")[0]
+
+                const imageInputElement = document.createElement('div')
+                imageInputElement.innerHTML = '<input required type="file" class="form-control" id="image-input"/>'
+
+                const imageLabelElement = document.createElement('label')
+                imageLabelElement.innerText = 'Файл : '
+
+                formContent.appendChild(imageLabelElement)
+                formContent.appendChild(imageInputElement)
+
+                const confirmButton = modal.getElementsByClassName("kfrm-button is-info")[0]
+                const closeButton = modal.getElementsByClassName("kfrm-button")[1]
+                confirmButton.onclick = () => {
+                    let photo = imageInputElement.children[0].files[0]
+                    if (!photo) {
+                        return
+                    }
+
+                    let formData = new FormData()
+                    formData.append("image", photo)
+                    fetch(`${window.location.origin}/api/v1/images?type=Products`, {method: "POST", body: formData})
+                        .then(() => {
+                           closeButton.click()
+                           window.location.reload()
+                        });
+                }
+            }
+        });
+
+        mutationObserver.observe(document,  {subtree: true, childList: true});
+    </script>
+}

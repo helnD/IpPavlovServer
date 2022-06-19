@@ -32,14 +32,5 @@ namespace WebApplication
             await _host.InitAsync();
             await _host.RunAsync();
         }
-
-        /// <summary>
-        /// Create host builder.
-        /// </summary>
-        /// <param name="args">Command line arguments.</param>
-        /// <returns>Host builder.</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

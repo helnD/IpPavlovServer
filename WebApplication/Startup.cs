@@ -1,3 +1,7 @@
+using System.Threading;
+using System.Threading.Tasks;
+using EasyData;
+using EasyData.Services;
 using Infrastructure;
 using Infrastructure.Abstractions;
 using Infrastructure.DataAccess;
@@ -40,7 +44,7 @@ namespace WebApplication
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebApplication", Version = "v1"});
             });
 
-            services.AddControllers()
+            services.AddControllersWithViews()
                 .AddNewtonsoftJson(builder =>
                 {
                     builder.SerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ";
@@ -92,6 +96,7 @@ namespace WebApplication
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseCors(builder =>
                 builder.WithOrigins(Configuration.GetSection("FrontendOrigins:DevOrigin").Value,
@@ -100,7 +105,18 @@ namespace WebApplication
                     .AllowAnyMethod()
             );
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapEasyData(options =>
+                {
+                    options.UseDbContext<AppDbContext>();
+                });
+
+                endpoints.MapControllerRoute(name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllers();
+            });
         }
     }
 }

@@ -10,34 +10,34 @@ namespace Infrastructure.DataAccess
     public sealed class AppDbContext : DbContext, IDbContext
     {
         /// <inheritdoc/>
-        public DbSet<Category> Categories { get; init; }
+        public DbSet<Category> Categories { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<Certificate> Certificates { get; init; }
+        public DbSet<Certificate> Certificates { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<Image> Images { get; init; }
+        public DbSet<Image> Images { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<Partner> Partners { get; init; }
+        public DbSet<Partner> Partners { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<Product> Products { get; init; }
+        public DbSet<Product> Products { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<SalesLeader> Leaders { get; init; }
+        public DbSet<SalesLeader> Leaders { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<SalesRepresentative> SalesRepresentatives { get; init; }
+        public DbSet<SalesRepresentative> SalesRepresentatives { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<Question> Questions { get; init; }
+        public DbSet<Question> Questions { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<Stock> Stocks { get; init; }
+        public DbSet<Stock> Stocks { get; private set; }
 
         /// <inheritdoc/>
-        public DbSet<CooperationRequest> CooperationRequests { get; init; }
+        public DbSet<CooperationRequest> CooperationRequests { get; private set; }
 
         /// <summary>
         /// Initializes <see cref="AppDbContext"/>.

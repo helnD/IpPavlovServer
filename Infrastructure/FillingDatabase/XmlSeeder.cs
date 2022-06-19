@@ -31,7 +31,7 @@ namespace Infrastructure.FillingDatabase
         /// <param name="fileName">XML filename.</param>
         /// <param name="createEntity">Object creation logic.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        public async Task SeedData(string fileName, Func<XElement, T> createEntity, CancellationToken cancellationToken)
+        public async Task SeedData(string fileName, Func<XElement, Task<T>> createEntity, CancellationToken cancellationToken)
         {
             if (await _context.Entity<T>().AnyAsync(cancellationToken))
             {
@@ -58,7 +58,7 @@ namespace Infrastructure.FillingDatabase
 
             foreach (var node in childNodes)
             {
-                await _context.Entity<T>().AddAsync(createEntity(node), cancellationToken);
+                await _context.Entity<T>().AddAsync(await createEntity(node), cancellationToken);
             }
 
             await _context.SaveChangesAsync(cancellationToken);

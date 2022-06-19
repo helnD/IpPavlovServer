@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using EasyData.EntityFrameworkCore;
+
+namespace Domain
 {
     /// <summary>
     /// Local stored image.
@@ -18,6 +20,7 @@
         /// <summary>
         /// Path to image.
         /// </summary>
+        [MetaEntityAttr(ShowOnCreate = false)]
         public string Path { get; init; }
     }
 }

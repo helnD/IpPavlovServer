@@ -42,25 +42,25 @@ namespace Infrastructure.FillingDatabase
         /// </summary>
         public async Task SeedTestDatabase(CancellationToken cancellationToken)
         {
-            await _xmlSeederFacade.CategoriesSeeder.SeedData(_initializationSettings.CategoriesFile, CreateCategory,
+            await _xmlSeederFacade.CategoriesSeeder.SeedData(_initializationSettings.CategoriesFile, CreateCategoryAsync,
                 cancellationToken);
             await _xmlSeederFacade.CertificatesSeeder.SeedData(_initializationSettings.CertificatesFile, CreateCertificate,
                 cancellationToken);
-            await _xmlSeederFacade.PartnersSeeder.SeedData(_initializationSettings.PartnersFile, CreatePartner,
+            await _xmlSeederFacade.PartnersSeeder.SeedData(_initializationSettings.PartnersFile, CreatePartnerAsync,
                 cancellationToken);
             await _xmlSeederFacade.SalesRepresentativesSeeder.SeedData(_initializationSettings.RepresentativesFile,
-                CreateRepresentative, cancellationToken);
+                CreateRepresentativeAsync, cancellationToken);
             await _productsDataSeed.SeedProducts(cancellationToken);
         }
 
-        private Category CreateCategory(XElement categoryNode)
+        private Task<Category> CreateCategoryAsync(XElement categoryNode)
         {
             var name = categoryNode.Value;
             var iconName = categoryNode.Attribute("icon")?.Value;
             var routeName = Regex.Replace(_unidecode(name), @"[',.-_]", "")
                 .Replace(' ', '_');
 
-            return new Category
+            var category = new Category
             {
                 Name = name,
                 RouteName = routeName,
@@ -69,17 +69,18 @@ namespace Infrastructure.FillingDatabase
                     Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Categories, iconName)
                 }
             };
+
+            return Task.FromResult(category);
         }
 
-        private Certificate CreateCertificate(XElement certificateNode)
+        private async Task<Certificate> CreateCertificate(XElement certificateNode)
         {
             const string descriptionName = "description";
 
             var imageName = certificateNode.Attribute("image")?.Value;
             var description = certificateNode.Descendants(descriptionName).First().Value.Trim();
 
-            var task = CreateMini(Path.Combine(_imagesSettings.Root, _imagesSettings.Certificates), imageName);
-            task.Wait();
+            await CreateMiniAsync(Path.Combine(_imagesSettings.Root, _imagesSettings.Certificates), imageName);
 
             return new Certificate
             {
@@ -91,7 +92,7 @@ namespace Infrastructure.FillingDatabase
             };
         }
 
-        private Partner CreatePartner(XElement partnerNode)
+        private async Task<Partner> CreatePartnerAsync(XElement partnerNode)
         {
             const string descriptionName = "description";
 
@@ -100,10 +101,9 @@ namespace Infrastructure.FillingDatabase
             var link = partnerNode.Attribute("link")?.Value;
             var description = partnerNode.Descendants(descriptionName).First().Value.Trim();
 
-            var task = CreateMini(Path.Combine(_imagesSettings.Root, _imagesSettings.Partners), iconName);
-            task.Wait();
+            await CreateMiniAsync(Path.Combine(_imagesSettings.Root, _imagesSettings.Partners), iconName);
 
-            return new Partner
+            var partner = new Partner
             {
                 Name = name,
                 Description = description,
@@ -113,9 +113,11 @@ namespace Infrastructure.FillingDatabase
                     Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Partners, iconName)
                 }
             };
+
+            return partner;
         }
 
-        private SalesRepresentative CreateRepresentative(XElement partnerNode)
+        private Task<SalesRepresentative> CreateRepresentativeAsync(XElement partnerNode)
         {
             var firstName = partnerNode.Attribute("firstName")?.Value;
             var lastName = partnerNode.Attribute("lastName")?.Value;
@@ -125,7 +127,7 @@ namespace Infrastructure.FillingDatabase
             var start = partnerNode.Attribute("startOfWork")?.Value;
             var end = partnerNode.Attribute("endOfWork")?.Value;
 
-            return new SalesRepresentative
+            var salesRepresentative = new SalesRepresentative
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -135,9 +137,11 @@ namespace Infrastructure.FillingDatabase
                 StartOfWork = TimeSpan.Parse(start),
                 EndOfWork = TimeSpan.Parse(end)
             };
+
+            return Task.FromResult(salesRepresentative);
         }
 
-        private async Task CreateMini(string root, string name)
+        private async Task CreateMiniAsync(string root, string name)
         {
             await using var image = new FileStream(Path.Combine(root, name), FileMode.Open);
             await using var resizedImage = await _imageResizer.Reduce(image, Threshold, default);

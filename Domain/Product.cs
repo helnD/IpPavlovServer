@@ -42,6 +42,8 @@ namespace Domain
         /// </summary>
         public decimal Price { get; init; }
 
+        public int CategoryId { get; init; }
+
         /// <summary>
         /// Category of product.
         /// </summary>
