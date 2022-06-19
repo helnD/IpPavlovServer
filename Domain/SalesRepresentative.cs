@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using EasyData.EntityFrameworkCore;
 
 namespace Domain
 {
     /// <summary>
     /// Our sales representative.
     /// </summary>
+    [MetaEntity(DisplayName = "Торговые представители")]
     public record SalesRepresentative
     {
         /// <summary>
@@ -15,36 +18,50 @@ namespace Domain
         /// <summary>
         /// Region where sales representative works.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Район")]
+        [Required]
         public string Region { get; init; }
 
         /// <summary>
-        /// Firstname.
+        /// Representative firstname.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Имя представителя")]
+        [Required]
         public string FirstName { get; init; }
 
         /// <summary>
-        /// Lastname.
+        /// Representative lastname.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Фамилия представителя")]
+        [Required]
         public string LastName { get; init; }
 
         /// <summary>
         /// Middle name.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Отчество представителя")]
+        [Required]
         public string MiddleName { get; init; }
 
         /// <summary>
         /// Phone number.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Телефон")]
+        [Required]
         public string Phone { get; init; }
 
         /// <summary>
         /// Time when representative begins work.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Начало рабочего дня")]
+        [Required]
         public TimeSpan StartOfWork { get; init; }
 
         /// <summary>
         /// Time when representative ends work.
         /// </summary>
+        [MetaEntityAttr(DisplayName = "Конец рабочего дня")]
+        [Required]
         public TimeSpan EndOfWork { get; init; }
     }
 }

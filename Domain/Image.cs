@@ -1,10 +1,12 @@
-﻿using EasyData.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations;
+using EasyData.EntityFrameworkCore;
 
 namespace Domain
 {
     /// <summary>
     /// Local stored image.
     /// </summary>
+    [MetaEntity(DisplayName = "Изображения")]
     public record Image
     {
         /// <summary>
@@ -21,6 +23,7 @@ namespace Domain
         /// Path to image.
         /// </summary>
         [MetaEntityAttr(ShowOnCreate = false, ShowOnEdit = false)]
+        [Required]
         public string Path { get; init; }
     }
 }

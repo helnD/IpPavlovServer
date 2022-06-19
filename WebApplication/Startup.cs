@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 using EasyData;
 using EasyData.Services;
 using Infrastructure;
@@ -109,7 +110,17 @@ namespace WebApplication
             {
                 endpoints.MapEasyData(options =>
                 {
-                    options.UseDbContext<AppDbContext>();
+                    options.UseDbContext<AppDbContext>(opt =>
+                    {
+                        opt.CustomizeModel(model =>
+                        {
+                            model.Entity<CooperationRequest>()
+                                .SetEditable(false);
+
+                            model.Entity<Question>()
+                                .SetEditable(false);
+                        });
+                    });
                 });
 
                 endpoints.MapControllerRoute(name: "default",
