@@ -1,28 +1,35 @@
+using Infrastructure.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApplication.Controllers;
 
+/// <summary>
+/// Controller for add/edit content.
+/// </summary>
 [Route("easydata")]
+[Authorize]
 public class EasyDataController : Controller
 {
     private readonly ILogger<EasyDataController> _logger;
+    private readonly ILoggedUserAccessor _loggedUserAccessor;
 
-    public EasyDataController(ILogger<EasyDataController> logger)
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    public EasyDataController(ILogger<EasyDataController> logger,
+        ILoggedUserAccessor loggedUserAccessor)
     {
         _logger = logger;
+        _loggedUserAccessor = loggedUserAccessor;
     }
 
+    /// <summary>
+    /// Index controller.
+    /// </summary>
     [Route("{**entity}")]
     public IActionResult Index(string entity)
     {
-        if (string.IsNullOrEmpty(entity))
-        {
-            _logger.LogInformation("Index page");
-        }
-        else
-        {
-            _logger.LogInformation($"{entity} page");
-        }
-
         return View();
     }
 }

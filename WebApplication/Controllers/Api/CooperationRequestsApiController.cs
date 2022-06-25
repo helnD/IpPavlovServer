@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.CooperationRequests.AddRequest;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     [ApiController]
     [Route("api/v1/cooperation-requests")]

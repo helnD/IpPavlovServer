@@ -1,18 +1,70 @@
 ﻿@{
     ViewData["Title"] = "Управление данными";
 }
-<div id="EasyDataContainer"></div>
+<div id="EasyDataContainer">
+    <h1>Управление данными</h1>
+</div>
 
 @section Scripts {
     <link rel="stylesheet" href="https://cdn.korzh.com/ed/1.4.3/easydata.min.css"/>
     <script src="https://cdn.korzh.com/ed/1.4.3/easydata.min.js" type="text/javascript"></script>
 
     <script>
+        const changedIdPrefix = "_changed_"
+
         window.addEventListener('load', function () {
             new easydata.crud.EasyDataViewDispatcher().run()
         });
 
-        const mutationObserver = new MutationObserver(() => {
+        const changeEntitiesTitle = () => {
+            const title = document.getElementsByTagName('h1')[0]
+            if (title && title.innerText === 'Entities') {
+                title.id = changedIdPrefix + title.id
+                title.innerText = 'Управление данными'
+            }
+        }
+
+        const changeEntitiesListTitle = () => {
+            const titleElement = document.querySelector(".ed-menu-description")
+
+            if (titleElement.id.startsWith(changedIdPrefix)) {
+                return
+            }
+
+            if (titleElement) {
+                titleElement.innerText = 'Выберите таблицу для просмотра/редактирования контента'
+                titleElement.id = changedIdPrefix + titleElement.id
+            }
+        }
+
+        const removeIdentityEntities = () => {
+            const identityEntities = [
+                'Identity User Logins',
+                'Identity User Claims',
+                'Identity Role Claims',
+                'Identity Roles',
+                'Identity User Roles',
+                'Identity User Tokens'
+            ]
+
+            const entitiesList = document.querySelector(".ed-entity-menu")
+            console.log(entitiesList)
+            if (!entitiesList) {
+                return;
+            }
+
+            const entities = [... entitiesList.children];
+            const entitiesToRemove = entities.filter(entity => {
+                const value = entity.children[0].innerText;
+                return identityEntities.includes(value)
+            })
+
+            for (const entityToRemove of entitiesToRemove) {
+                entityToRemove.remove()
+            }
+        }
+
+        const insertImageForm = () => {
             if (window.location.href.includes('Image')) {
                 const imageInput = document.getElementById("image-input");
                 if (imageInput) {
@@ -66,6 +118,13 @@
                         });
                 }
             }
+        }
+
+        const mutationObserver = new MutationObserver(() => {
+            changeEntitiesTitle()
+            changeEntitiesListTitle()
+            insertImageForm()
+            removeIdentityEntities()
         });
 
         mutationObserver.observe(document,  {subtree: true, childList: true});

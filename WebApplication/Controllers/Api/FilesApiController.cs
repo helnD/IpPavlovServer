@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Resources.GetPriceList;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     /// <summary>
     /// Controller for downloading/uploading files.

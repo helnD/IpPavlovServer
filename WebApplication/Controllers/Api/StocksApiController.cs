@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Stocks.GetAllStocks;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     [ApiController]
     [Route("api/v1/stocks")]

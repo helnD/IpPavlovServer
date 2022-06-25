@@ -8,7 +8,7 @@ using UseCases.Categories.GetCategories;
 using UseCases.Categories.GetCategory;
 using UseCases.Products.GetProducts.Dtos;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     /// <summary>
     /// Controller for categories.

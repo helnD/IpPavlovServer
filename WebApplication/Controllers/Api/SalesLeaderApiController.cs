@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -7,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Leaders.GetLeaders;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     /// <summary>
     /// Controller represent API for interaction with <see cref="SalesLeader"/> launentity.

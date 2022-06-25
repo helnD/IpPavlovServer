@@ -3,11 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using Infrastructure.Abstractions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess
 {
-    public sealed class AppDbContext : DbContext, IDbContext
+    public sealed class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>, IDbContext
     {
         /// <inheritdoc/>
         public DbSet<Category> Categories { get; private set; }
@@ -38,6 +40,13 @@ namespace Infrastructure.DataAccess
 
         /// <inheritdoc/>
         public DbSet<CooperationRequest> CooperationRequests { get; private set; }
+
+        /// <inheritdoc/>
+        public DbSet<User> Users { get; private set; }
+
+        /// <inheritdoc/>
+
+        public override DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
 
         /// <summary>
         /// Initializes <see cref="AppDbContext"/>.

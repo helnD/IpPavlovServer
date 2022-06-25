@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using UseCases.Resources.GetImage;
 using UseCases.Resources.UploadImage;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     /// <summary>
     /// Controller for images uploading/downloading

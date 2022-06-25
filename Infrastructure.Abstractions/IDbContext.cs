@@ -57,6 +57,11 @@ namespace Infrastructure.Abstractions
         public DbSet<Stock> Stocks { get; }
 
         /// <summary>
+        /// Users.
+        /// </summary>
+        DbSet<User> Users { get; }
+
+        /// <summary>
         /// Cooperation requests.
         /// </summary>
         public DbSet<CooperationRequest> CooperationRequests { get; }

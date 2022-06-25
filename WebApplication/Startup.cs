@@ -1,7 +1,11 @@
+using System;
+using System.ComponentModel;
+using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using EasyData;
+using EasyData.EntityFrameworkCore;
 using EasyData.Services;
 using Infrastructure;
 using Infrastructure.Abstractions;
@@ -9,10 +13,13 @@ using Infrastructure.DataAccess;
 using Infrastructure.Email;
 using Infrastructure.FillingDatabase;
 using Infrastructure.Images;
+using Infrastructure.Implementations;
 using Infrastructure.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,6 +72,7 @@ namespace WebApplication
             services.AddTransient<XmlSeederFacade>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IImageResizer, ImageResizer>();
+            services.AddTransient<ILoggedUserAccessor, LoggedUserAccessor>();
             services.AddTransient(typeof(XmlSeeder<>), typeof(XmlSeeder<>));
             services.AddSingleton<Locker>();
 
@@ -78,6 +86,22 @@ namespace WebApplication
             services.Configure<ImagesSettings>(Configuration.GetSection("Resources:Images"));
             services.Configure<FilesSettings>(Configuration.GetSection("Resources:Files"));
             services.Configure<SmtpConfiguration>(Configuration.GetSection("SmtpConfiguration"));
+
+            services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddAuthentication()
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SameSite = SameSiteMode.Strict;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(3);
+
+                    options.LoginPath = "/auth";
+                    options.AccessDeniedPath = "/auth";
+                    options.SlidingExpiration = true;
+                });
 
             services.AddMediatR(typeof(GetLeadersQuery).Assembly);
 
@@ -106,6 +130,9 @@ namespace WebApplication
                     .AllowAnyMethod()
             );
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapEasyData(options =>
@@ -119,6 +146,10 @@ namespace WebApplication
 
                             model.Entity<Question>()
                                 .SetEditable(false);
+
+                            model.Entity<User>()
+                                .SetEditable(false);
+
                         });
                     });
                 });

@@ -7,6 +7,8 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="MediatR" Version="9.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+      <PackageReference Include="Saritasa.Tools.Domain" Version="0.8.2" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,12 +4,9 @@ using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UseCases.Categories.GetCategories;
-using UseCases.Categories.GetCategory;
 using UseCases.Certificates.GetCertificates;
-using UseCases.Products.GetProducts.Dtos;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     /// <summary>
     /// Controller for certificates.

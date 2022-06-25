@@ -7,7 +7,7 @@ using UseCases.Products.GetProductById;
 using UseCases.Products.GetProducts;
 using UseCases.Products.GetProducts.Dtos;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Api
 {
     /// <summary>
     /// API Controller for products.
