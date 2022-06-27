@@ -62,4 +62,14 @@ public class AuthController : Controller
 
         return RedirectToAction(nameof(EasyDataController.Index), "EasyData");
     }
+
+    /// <summary>
+    /// Log out user from the application.
+    /// </summary>
+    [Route("[action]")]
+    public async Task<IActionResult> Logout(CancellationToken cancellationToken)
+    {
+        await _mediator.Send(new LogoutCommand(), cancellationToken);
+        return RedirectToAction(nameof(Index));
+    }
 }

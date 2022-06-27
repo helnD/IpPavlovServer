@@ -1,9 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Управление данными";
 }
-<div id="EasyDataContainer">
-    <h1>Управление данными</h1>
-</div>
+
+<div id="EasyDataContainer"></div>
 
 @section Scripts {
     <link rel="stylesheet" href="https://cdn.korzh.com/ed/1.4.3/easydata.min.css"/>
@@ -19,8 +18,7 @@
         const changeEntitiesTitle = () => {
             const title = document.getElementsByTagName('h1')[0]
             if (title && title.innerText === 'Entities') {
-                title.id = changedIdPrefix + title.id
-                title.innerText = 'Управление данными'
+                title.remove()
             }
         }
 

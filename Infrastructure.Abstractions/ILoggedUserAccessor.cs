@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
+using Domain;
 
 namespace Infrastructure.Abstractions;
 
@@ -12,6 +14,11 @@ public interface ILoggedUserAccessor
     /// </summary>
     /// <returns>Current user identifier.</returns>
     Result<int> GetCurrentUserId();
+
+    /// <summary>
+    /// Returns current user;
+    /// </summary>
+    Task<Result<User>> GetCurrentUserAsync();
 
     /// <summary>
     /// Return true if there is any user authenticated.
