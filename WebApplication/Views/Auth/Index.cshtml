@@ -4,13 +4,13 @@
     Layout = "_Layout";
 }
 
-<form asp-action="Login" method="post">
-    <div class="mb-2">
-        <input type="text" class="form-control" placeholder="Введите логин" asp-for="Login"/>
-    </div>
-    <div class="mb-4">
-        <input type="password" class="form-control" placeholder="Введите пароль" asp-for="Password"/>
-    </div>
-    <div class="validation alert alert-danger" role="alert" asp-validation-summary="All"></div>
-    <button type="submit" class="btn btn-primary">Вход</button>
+<form class="auth-container" asp-action="Login" method="post">
+    @Html.AntiForgeryToken()
+    <input type="text" class="form-control" placeholder="Введите логин" asp-for="Login"/>
+    <input type="password" class="form-control" placeholder="Введите пароль" asp-for="Password"/>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="validation alert alert-danger" role="alert" asp-validation-summary="All"></div>
+    }
+    <button type="submit" class="kfrm-button is-info">Вход</button>
 </form>

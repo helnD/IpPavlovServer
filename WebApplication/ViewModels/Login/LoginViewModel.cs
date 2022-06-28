@@ -10,12 +10,12 @@ public class LoginViewModel
     /// <summary>
     /// Login.
     /// </summary>
-    [Required(ErrorMessage = "Это поле обязательно к заполнению.")]
+    [Required(ErrorMessage = "Логин обязателен к заполнению.")]
     public string Login { get; set; }
 
     /// <summary>
     /// Password
     /// </summary>
-    [Required(ErrorMessage = "Это поле обязательно к заполнению.")]
+    [Required(ErrorMessage = "Пароль обязателен к заполнению.")]
     public string Password { get; set; }
 }
