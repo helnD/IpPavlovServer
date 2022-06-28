@@ -8,61 +8,60 @@ using Infrastructure.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Infrastructure.FillingDatabase
+namespace Infrastructure.FillingDatabase;
+
+/// <summary>
+/// Class for seeding data from data seed xml-configuration.
+/// </summary>
+/// <typeparam name="T">Type of table entity.</typeparam>
+public class XmlSeeder<T> where T : class, new()
 {
-    /// <summary>
-    /// Class for seeding data from data seed xml-configuration.
-    /// </summary>
-    /// <typeparam name="T">Type of table entity.</typeparam>
-    public class XmlSeeder<T> where T : class, new()
+    private readonly IDbContext _context;
+    private readonly ILogger<XmlSeeder<T>> _logger;
+
+    public XmlSeeder(IDbContext context, ILogger<XmlSeeder<T>> logger)
     {
-        private readonly IDbContext _context;
-        private readonly ILogger<XmlSeeder<T>> _logger;
+        _context = context;
+        _logger = logger;
+    }
 
-        public XmlSeeder(IDbContext context, ILogger<XmlSeeder<T>> logger)
+    /// <summary>
+    /// Seed data from XML file.
+    /// </summary>
+    /// <param name="fileName">XML filename.</param>
+    /// <param name="createEntity">Object creation logic.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    public async Task SeedData(string fileName, Func<XElement, Task<T>> createEntity, CancellationToken cancellationToken)
+    {
+        if (await _context.Entity<T>().AnyAsync(cancellationToken))
         {
-            _context = context;
-            _logger = logger;
+            return;
         }
 
-        /// <summary>
-        /// Seed data from XML file.
-        /// </summary>
-        /// <param name="fileName">XML filename.</param>
-        /// <param name="createEntity">Object creation logic.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        public async Task SeedData(string fileName, Func<XElement, Task<T>> createEntity, CancellationToken cancellationToken)
+        var pathToAssembly = Path.GetDirectoryName(GetType().Assembly.Location);
+        var file = Path.Combine(pathToAssembly, fileName);
+
+        var xmlDocument = XDocument.Load(new FileStream(file, FileMode.Open),
+            LoadOptions.None);
+
+        var collectionNode = xmlDocument.Descendants()
+            .FirstOrDefault(node => node.Attribute("type") is not null);
+        var className = typeof(T).Name;
+        if (collectionNode == null)
         {
-            if (await _context.Entity<T>().AnyAsync(cancellationToken))
-            {
-                return;
-            }
-
-            var pathToAssembly = Path.GetDirectoryName(GetType().Assembly.Location);
-            var file = Path.Combine(pathToAssembly, fileName);
-
-            var xmlDocument = XDocument.Load(new FileStream(file, FileMode.Open),
-                LoadOptions.None);
-
-            var collectionNode = xmlDocument.Descendants()
-                .FirstOrDefault(node => node.Attribute("type") is not null);
-            var className = typeof(T).Name;
-            if (collectionNode == null)
-            {
-                throw new InvalidOperationException(
-                    $"You should create file with {className} entity before start database initialization");
-            }
-
-            var childNodes = collectionNode.Descendants()
-                .Where(node => node.Parent == collectionNode);
-
-            foreach (var node in childNodes)
-            {
-                await _context.Entity<T>().AddAsync(await createEntity(node), cancellationToken);
-            }
-
-            await _context.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation("Table for {Name} entity initialized", className);
+            throw new InvalidOperationException(
+                $"You should create file with {className} entity before start database initialization");
         }
+
+        var childNodes = collectionNode.Descendants()
+            .Where(node => node.Parent == collectionNode);
+
+        foreach (var node in childNodes)
+        {
+            await _context.Entity<T>().AddAsync(await createEntity(node), cancellationToken);
+        }
+
+        await _context.SaveChangesAsync(cancellationToken);
+        _logger.LogInformation("Table for {Name} entity initialized", className);
     }
 }

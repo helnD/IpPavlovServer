@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-namespace ViewModels.Common.ViewModel
+namespace ViewModels.Common.ViewModel;
+
+public abstract class BaseViewModel : Notifier
 {
-    public abstract class BaseViewModel : Notifier
+    public virtual Task LoadAsync()
     {
-        public virtual Task LoadAsync()
-        {
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

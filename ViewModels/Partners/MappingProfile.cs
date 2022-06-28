@@ -3,16 +3,15 @@ using Domain;
 using UseCases.Partners.SavePartnersCommand;
 using ViewModels.Partners.Models;
 
-namespace ViewModels.Partners
-{
-    public class MappingProfile : Profile
-    {
-        public MappingProfile()
-        {
-            CreateMap<Partner, PartnerModel>();
+namespace ViewModels.Partners;
 
-            CreateMap<PartnersModel, SavePartnersCommand>();
-            CreateMap<PartnerModel, PartnerDto>();
-        }
+public class MappingProfile : Profile
+{
+    public MappingProfile()
+    {
+        CreateMap<Partner, PartnerModel>();
+
+        CreateMap<PartnersModel, SavePartnersCommand>();
+        CreateMap<PartnerModel, PartnerDto>();
     }
 }

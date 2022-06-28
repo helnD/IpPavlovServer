@@ -2,13 +2,12 @@
 using Domain;
 using MediatR;
 
-namespace UseCases.Categories.GetCategories
+namespace UseCases.Categories.GetCategories;
+
+/// <summary>
+/// Get all categories.
+/// </summary>
+public class GetAllCategoriesQuery : IRequest<IEnumerable<Category>>
 {
-    /// <summary>
-    /// Get all categories.
-    /// </summary>
-    public class GetAllCategoriesQuery : IRequest<IEnumerable<Category>>
-    {
-        public string Name { get; init; }
-    }
+    public string Name { get; init; }
 }

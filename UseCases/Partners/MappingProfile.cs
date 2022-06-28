@@ -2,14 +2,13 @@
 using Domain;
 using UseCases.Partners.SavePartnersCommand;
 
-namespace UseCases.Partners
+namespace UseCases.Partners;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<PartnerDto, Partner>()
-                .ForMember(dest => dest.Image, opt => opt.Ignore());;
-        }
+        CreateMap<PartnerDto, Partner>()
+            .ForMember(dest => dest.Image, opt => opt.Ignore());;
     }
 }

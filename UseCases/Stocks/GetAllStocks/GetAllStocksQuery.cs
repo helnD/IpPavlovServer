@@ -2,10 +2,9 @@
 using Domain;
 using MediatR;
 
-namespace UseCases.Stocks.GetAllStocks
-{
-    public class GetAllStocksQuery : IRequest<IEnumerable<Stock>>
-    {
+namespace UseCases.Stocks.GetAllStocks;
 
-    }
+public class GetAllStocksQuery : IRequest<IEnumerable<Stock>>
+{
+
 }

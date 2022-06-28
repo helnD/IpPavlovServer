@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace Infrastructure.Exceptions
+namespace Infrastructure.Exceptions;
+
+/// <summary>
+/// This exception will thrown if some resource not found
+/// </summary>
+public class NotFoundException : Exception
 {
     /// <summary>
-    /// This exception will thrown if some resource not found
+    /// Constructor for specific message.
     /// </summary>
-    public class NotFoundException : Exception
+    /// <param name="message">Exception message.</param>
+    public NotFoundException(string message) : base(message)
     {
-        /// <summary>
-        /// Constructor for specific message.
-        /// </summary>
-        /// <param name="message">Exception message.</param>
-        public NotFoundException(string message) : base(message)
-        {
 
-        }
     }
 }

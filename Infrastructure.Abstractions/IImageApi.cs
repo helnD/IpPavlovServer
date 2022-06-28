@@ -2,10 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Abstractions
+namespace Infrastructure.Abstractions;
+
+public interface IImageApi
 {
-    public interface IImageApi
-    {
-        public Task<int> UploadImageAsync(string pathToImage, string type, CancellationToken cancellationToken);
-    }
+    public Task<int> UploadImageAsync(string pathToImage, string type, CancellationToken cancellationToken);
 }

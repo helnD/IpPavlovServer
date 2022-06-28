@@ -2,13 +2,12 @@
 using Domain;
 using UseCases.CooperationRequests.AddRequest;
 
-namespace UseCases.CooperationRequests
+namespace UseCases.CooperationRequests;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<AddRequestCommand, CooperationRequest>();
-        }
+        CreateMap<AddRequestCommand, CooperationRequest>();
     }
 }

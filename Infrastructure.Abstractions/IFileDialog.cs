@@ -1,7 +1,6 @@
-﻿namespace Infrastructure.Abstractions
+﻿namespace Infrastructure.Abstractions;
+
+public interface IFileDialog
 {
-    public interface IFileDialog
-    {
-        string ShowFileDialog();
-    }
+    string ShowFileDialog();
 }

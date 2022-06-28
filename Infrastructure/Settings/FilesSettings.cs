@@ -1,9 +1,8 @@
-﻿namespace Infrastructure.Settings
-{
-    public class FilesSettings
-    {
-        public string Root { get; init; }
+﻿namespace Infrastructure.Settings;
 
-        public string PriceList { get; init; }
-    }
+public class FilesSettings
+{
+    public string Root { get; init; }
+
+    public string PriceList { get; init; }
 }
