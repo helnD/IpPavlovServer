@@ -42,7 +42,7 @@ public class Partner
     /// <summary>
     /// Image identifier.
     /// </summary>
-    public int ImageId { get; set; }
+    public int? ImageId { get; set; }
 
     /// <summary>
     /// Logo of partner.

@@ -3,9 +3,9 @@ using Domain;
 using Extensions.Hosting.AsyncInitialization;
 using Infrastructure;
 using Infrastructure.DataAccess;
-using Infrastructure.FillingDatabase;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WebApplication.FillingDatabase;
 
 namespace WebApplication.Setup.Database;
 
@@ -31,7 +31,7 @@ public class DatabaseInitializer : IAsyncInitializer
     public async Task InitializeAsync()
     {
         await _context.Database.MigrateAsync();
-        await _dataSeed.SeedTestDatabase(default);
+        await _dataSeed.SeedInitialDatabase(default);
         await AddAdminUser();
     }
 

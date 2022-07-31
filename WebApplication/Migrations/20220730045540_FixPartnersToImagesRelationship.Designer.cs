@@ -3,6 +3,7 @@ using System;
 using Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220730045540_FixPartnersToImagesRelationship")]
+    partial class FixPartnersToImagesRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,7 @@ namespace WebApplication.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int?>("ProducerId")
+                    b.Property<int>("ProducerId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
@@ -549,7 +551,9 @@ namespace WebApplication.Migrations
 
                     b.HasOne("Domain.Partner", "Producer")
                         .WithMany("Products")
-                        .HasForeignKey("ProducerId");
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Stock", "Stock")
                         .WithMany("RelatedProducts")

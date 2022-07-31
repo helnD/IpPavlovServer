@@ -72,7 +72,7 @@ public record Product
     /// Producer identifier.
     /// </summary>
     [MetaEntityAttr(ShowOnView = false)]
-    public int ProducerId { get; init; }
+    public int? ProducerId { get; init; }
 
     /// <summary>
     /// Partner that supply product.
@@ -84,7 +84,7 @@ public record Product
     /// Image identifier.
     /// </summary>
     [MetaEntityAttr(ShowOnView = false)]
-    public int ImageId { get; init; }
+    public int? ImageId { get; init; }
 
     /// <summary>
     /// Image of product.

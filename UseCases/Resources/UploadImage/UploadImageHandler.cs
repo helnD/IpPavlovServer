@@ -28,7 +28,8 @@ public class UploadImageHandler : IRequestHandler<UploadImageCommand, int>
     /// <param name="imagesSettings">Image settings.</param>
     /// <param name="context">Database context.</param>
     /// <param name="imageResizer">Image resizer.</param>
-    public UploadImageHandler(IOptions<ImagesSettings> imagesSettings, IDbContext context,
+    public UploadImageHandler(IOptions<ImagesSettings> imagesSettings,
+        IDbContext context,
         IImageResizer imageResizer)
     {
         _imagesSettings = imagesSettings.Value;
@@ -46,15 +47,21 @@ public class UploadImageHandler : IRequestHandler<UploadImageCommand, int>
         var useCasesRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
         var nameWithoutExtension = Path.GetFileNameWithoutExtension(request.Name);
+        var invalidChars = Path.GetInvalidFileNameChars();
+
+        var validFileName = new string(nameWithoutExtension
+            .Where(symbol => !invalidChars.Contains(symbol))
+            .ToArray());
+
         var imageFolder = Path.Combine(useCasesRoot, GetImageFolder(request.Type));
         var imagesNumberWithSameName = new DirectoryInfo(imageFolder)
             .GetFiles()
-            .Count(image => image.Name.Contains(nameWithoutExtension));
+            .Count(image => image.Name.Contains(validFileName));
 
         var fileExtenstion = Path.GetExtension(request.Name);
         var imageName = imagesNumberWithSameName == 0
-            ? nameWithoutExtension + fileExtenstion
-            : $"{nameWithoutExtension}-{imagesNumberWithSameName + 1}{fileExtenstion}";
+            ? validFileName + fileExtenstion
+            : $"{validFileName}-{imagesNumberWithSameName + 1}{fileExtenstion}";
 
         var imagePath = Path.Combine(imageFolder, imageName);
         await using var imageFile = new FileStream(imagePath, FileMode.Create);

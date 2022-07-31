@@ -57,12 +57,6 @@ public sealed class AppDbContext : IdentityDbContext<User, IdentityRole<int>, in
     }
 
     /// <inheritdoc/>
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-    }
-
-    /// <inheritdoc/>
     public DbSet<T> Entity<T>() where T : class, new() => Set<T>();
 
     /// <inheritdoc cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />
