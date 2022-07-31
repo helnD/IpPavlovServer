@@ -122,7 +122,7 @@ namespace WebApplication.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("ImageId")
+                    b.Property<int?>("ImageId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Link")
@@ -159,13 +159,13 @@ namespace WebApplication.Migrations
                     b.Property<int>("DocumentId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ImageId")
+                    b.Property<int?>("ImageId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("ProducerId")
+                    b.Property<int?>("ProducerId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
@@ -530,9 +530,7 @@ namespace WebApplication.Migrations
                 {
                     b.HasOne("Domain.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.Navigation("Image");
                 });
@@ -547,15 +545,11 @@ namespace WebApplication.Migrations
 
                     b.HasOne("Domain.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.HasOne("Domain.Partner", "Producer")
                         .WithMany("Products")
-                        .HasForeignKey("ProducerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProducerId");
 
                     b.HasOne("Domain.Stock", "Stock")
                         .WithMany("RelatedProducts")

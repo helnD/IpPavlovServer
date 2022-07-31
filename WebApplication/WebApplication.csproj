@@ -11,6 +11,7 @@
         <PackageReference Include="EasyData.AspNetCore" Version="1.4.7" />
         <PackageReference Include="EasyData.EntityFrameworkCore.Relational" Version="1.4.7" />
         <PackageReference Include="Extensions.Hosting.AsyncInitialization" Version="1.0.0" />
+        <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.1" />
         <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
@@ -23,6 +24,7 @@
         <PackageReference Include="NLog" Version="4.7.9" />
         <PackageReference Include="NLog.Web.AspNetCore" Version="4.12.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+        <PackageReference Include="SharpZipLib" Version="1.3.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
         <PackageReference Include="Unidecode.NET" Version="2.1.0" />
     </ItemGroup>
@@ -40,151 +42,88 @@
       <EmbeddedResource Include="Setup\Database\Categories.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\oil.png" />
-      <None Remove="Images\Partners\ideal.png" />
       <EmbeddedResource Include="Images\Partners\ideal.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Partners\ml-best.svg" />
-      <None Remove="Images\Products\ананасы.png" />
-      <EmbeddedResource Include="Images\Products\ананасы.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Images\Products\клубника.png" />
-      <EmbeddedResource Include="Images\Products\клубника.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Images\Products\маслины.png" />
-      <EmbeddedResource Include="Images\Products\маслины.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Images\Products\масло.png" />
-      <EmbeddedResource Include="Images\Products\масло.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Images\Products\персики.png" />
-      <EmbeddedResource Include="Images\Products\персики.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Files\price-list.xlsx" />
-      <EmbeddedResource Include="Files\price-list.xlsx">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Images\Categories\can.png" />
-      <None Remove="Images\Partners\barko.jpg" />
       <EmbeddedResource Include="Images\Partners\barko.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Partners\golden-seed.jpg" />
       <EmbeddedResource Include="Images\Partners\golden-seed.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Partners\rolton.jpg" />
       <EmbeddedResource Include="Images\Partners\rolton.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Partners\ml-best.png" />
       <EmbeddedResource Include="Images\Partners\ml-best.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Certificates\cert1.jpg" />
       <EmbeddedResource Include="Images\Certificates\cert1.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Certificates\cert2.jpg" />
       <EmbeddedResource Include="Images\Certificates\cert2.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Certificates\cert3.jpg" />
       <EmbeddedResource Include="Images\Certificates\cert3.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Setup\Database\Certificates.xml" />
-      <EmbeddedResource Include="Setup\Database\Certificates.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Setup\Database\Partners.xml" />
       <EmbeddedResource Include="Setup\Database\Partners.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\canned-fish.svg" />
       <EmbeddedResource Include="Images\Categories\canned-fish.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\canned-fruit.svg" />
       <EmbeddedResource Include="Images\Categories\canned-fruit.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\canned-meat.svg" />
       <EmbeddedResource Include="Images\Categories\canned-meat.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\canned-vegetables-and-mushrooms.svg" />
       <EmbeddedResource Include="Images\Categories\canned-vegetables-and-mushrooms.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\chocolate.svg" />
       <EmbeddedResource Include="Images\Categories\chocolate.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\fast-food.svg" />
       <EmbeddedResource Include="Images\Categories\fast-food.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\flour.svg" />
       <EmbeddedResource Include="Images\Categories\flour.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\household-goods.svg" />
       <EmbeddedResource Include="Images\Categories\household-goods.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\milk-production.svg" />
       <EmbeddedResource Include="Images\Categories\milk-production.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\oil.svg" />
       <EmbeddedResource Include="Images\Categories\oil.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\olives.svg" />
       <EmbeddedResource Include="Images\Categories\olives.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\pasta.svg" />
       <EmbeddedResource Include="Images\Categories\pasta.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\powder.svg" />
       <EmbeddedResource Include="Images\Categories\powder.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\ready-made-food.svg" />
       <EmbeddedResource Include="Images\Categories\ready-made-food.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\sauce.svg" />
       <EmbeddedResource Include="Images\Categories\sauce.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\species.svg" />
       <EmbeddedResource Include="Images\Categories\species.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\sugar.svg" />
       <EmbeddedResource Include="Images\Categories\sugar.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\tea-and-coffee.svg" />
       <EmbeddedResource Include="Images\Categories\tea-and-coffee.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Images\Categories\water.svg" />
       <EmbeddedResource Include="Images\Categories\water.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Setup\Database\SalesRepresentatives.xml" />
-      <EmbeddedResource Include="Setup\Database\SalesRepresentatives.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

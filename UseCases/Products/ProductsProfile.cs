@@ -2,18 +2,17 @@
 using Domain;
 using UseCases.Products.GetProducts.Dtos;
 
-namespace UseCases.Products
+namespace UseCases.Products;
+
+/// <summary>
+/// Mapper profile for products.
+/// </summary>
+public class ProductsProfile : Profile
 {
-    /// <summary>
-    /// Mapper profile for products.
-    /// </summary>
-    public class ProductsProfile : Profile
+    public ProductsProfile()
     {
-        public ProductsProfile()
-        {
-            CreateMap<Partner, PartnerDto>();
-            CreateMap<Category, CategoryDto>();
-            CreateMap<Product, ProductDto>();
-        }
+        CreateMap<Partner, PartnerDto>();
+        CreateMap<Category, CategoryDto>();
+        CreateMap<Product, ProductDto>();
     }
 }

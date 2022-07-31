@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
 
-namespace Infrastructure.Abstractions
+namespace Infrastructure.Abstractions;
+
+/// <summary>
+/// Interface for reading excel file.
+/// </summary>
+public interface IExcelReader
 {
     /// <summary>
-    /// Interface for reading excel file.
+    /// Get next row.
     /// </summary>
-    public interface IExcelReader
-    {
-        /// <summary>
-        /// Get next row.
-        /// </summary>
-        /// <returns>List with cells values.</returns>
-        IList<string> NextRow();
+    /// <returns>List with cells values.</returns>
+    IList<string> NextRow();
 
-        /// <summary>
-        /// Current row is last.
-        /// </summary>
-        bool IsEnd { get; }
-    }
+    /// <summary>
+    /// Current row is last.
+    /// </summary>
+    bool IsEnd { get; }
 }

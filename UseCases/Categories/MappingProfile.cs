@@ -2,14 +2,13 @@
 using Domain;
 using UseCases.Categories.SaveCategories;
 
-namespace UseCases.Categories
+namespace UseCases.Categories;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<CategoryDto, Category>()
-                .ForMember(dest => dest.Icon, opt => opt.Ignore());;
-        }
+        CreateMap<CategoryDto, Category>()
+            .ForMember(dest => dest.Icon, opt => opt.Ignore());;
     }
 }

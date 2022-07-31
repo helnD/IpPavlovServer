@@ -2,17 +2,16 @@
 using MediatR;
 using UseCases.Products.GetProducts.Dtos;
 
-namespace UseCases.Categories.GetCategory
+namespace UseCases.Categories.GetCategory;
+
+/// <summary>
+/// Query for category.
+/// </summary>
+public class GetCategoryQuery : IRequest<CategoryDto>
 {
     /// <summary>
-    /// Query for category.
+    /// Category route name.
     /// </summary>
-    public class GetCategoryQuery : IRequest<CategoryDto>
-    {
-        /// <summary>
-        /// Category route name.
-        /// </summary>
-        [Required]
-        public string RouteName { get; init; }
-    }
+    [Required]
+    public string RouteName { get; init; }
 }

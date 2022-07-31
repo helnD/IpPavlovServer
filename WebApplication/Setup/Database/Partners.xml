@@ -1,29 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <partners type="Partner">
-    <partner name="Медведь любимый" icon="ml-best.png" link="http://www.ml-best.com/">
-        <description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </description>
-    </partner>
-    <partner name="Ideal" icon="ideal.png" link="https://www.ideal-eda.ru/">
-        <description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </description>
-    </partner>
-    <partner name="Барко" icon="barko.jpg" link="https://www.barko.ru/">
-        <description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </description>
-    </partner>
-    <partner name="Золотая семечка" icon="golden-seed.jpg" link="https://www.barko.ru/">
-        <description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </description>
-    </partner>
-    <partner name="Ролтон" icon="rolton.jpg" link="https://www.goldenseed.ru">
-        <description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </description>
-    </partner>
+    <partner name="Медведь любимый" icon="ml-best.png" link="http://www.ml-best.com/"/>
+    <partner name="Ideal" icon="ideal.png" link="https://www.ideal-eda.ru/"/>
+    <partner name="Барко" icon="barko.jpg" link="https://www.barko.ru/"/>
+    <partner name="Золотая семечка" icon="golden-seed.jpg" link="https://www.barko.ru/"/>
+    <partner name="Ролтон" icon="rolton.jpg" link="https://www.goldenseed.ru"/>
+    <partner name="Агромастер" icon="agromaster.jpg"/>
+    <partner name="Алейка" icon="aleika.png"/>
+    <partner name="АЯН" icon="ayan.png" link="http://www.ayan.ru/"/>
+    <partner name="Беларусь"/>
+    <partner name="Беляевская" icon="belyevskaya.png" link="https://www.belyaevskaya.muka.pro/muka/"/>
+    <partner name="Бийск"/>
+    <partner name="Благо" icon="blago.png" link="https://gcblago.ru/"/>
+    <partner name="Бояринъ" icon="boyarin.png" link="https://trisfoods.ru/brands/boyarin/"/>
+    <partner name="Бунге" icon="bunge.png" link="https://bungepro.ru/"/>
+    <partner name="Вкусно Полезно" icon="vkusnopolezno.jpg" link="https://vkusno-polezno.ru/"/>
+    <partner name="Гастроном" icon="gastronom.png" link="https://krasmz.com/"/>
+    <partner name="Грин Рей" icon="green-ray.jpg" link="http://www.greenray.biz/"/>
+    <partner name="Greenfield" icon="greenfield.png" link="https://greenfieldtea.co.uk/"/>
+    <partner name="Дасмар" icon="dasmar.png"/>
+    <partner name="Доброфлот" icon="dobroflot.png" link="https://xn--90afwkbbltp.xn--p1ai/"/>
+    <partner name="Домат" icon="domat.jpg"/>
+    <partner name="Здоровье"/>
+    <partner name="Золотая меленка" icon="zolotaya-melenka.png" link="http://www.z-melenka.ru/"/>
+    <partner name="Канди" icon="kandi.png" link="https://kandy-tea.ru/"/>
+    <partner name="КБР"/>
+    <partner name="Богородская кондитерская фабрика" icon="bogorodskaya.png" link="https://kf-bogorodskaya.ru/"/>
+    <partner name="Кубаночка" icon="kubanochka.jpeg" link="https://kubanochka.ru/"/>
+    <partner name="Маккофе" icon="makkofe.png" link="https://maccoffee.com/ru-ru/"/>
+    <partner name="Макфа" icon="makfa.png" link="https://www.makfa.ru/"/>
+    <partner name="Медвежье побережье" icon="medvezhe-poberezhe.png"/>
+    <partner name="Мельник" icon="melnik.jpg"/>
+    <partner name="Месье"/>
+    <partner name="Нескафе" icon="nescafe.png" link="https://www.nescafe.ru/"/>
+    <partner name="Новгород"/>
+    <partner name="Оршанский МКК" icon="OMKK.jpg" link="https://omkk.by/"/>
+    <partner name="Примрыбснаб" icon="primrybsnab.jpg" link="http://www.fishdv.ru"/>
+    <partner name="Приправыч" icon="pripravich.jpg" link="https://www.pripravich.com/"/>
+    <partner name="Провансаль"/>
+    <partner name="Супер Мука" icon="super-muka.jpg" link="https://super-muka.ru/"/>
+    <partner name="Товарное хозяйство" icon="tovarnoe-hozyaistvo.jpg" link="http://www.tho.ru/"/>
+    <partner name="Трудовая пятилетка"/>
+    <partner name="Тульский продукт" icon="tulski-product.png" link="https://tulproduct.ru/"/>
+    <partner name="Улан Уде" icon="buryatmyasprom.jpg" link="https://burmp.ru/"/>
+    <partner name="Юг Руси" icon="yug-rusi.png" link="https://www.goldenseed.ru/"/>
+    <partner name="ЮФМР"/>
 </partners>

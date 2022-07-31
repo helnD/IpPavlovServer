@@ -2,15 +2,14 @@
 using Domain;
 using UseCases.Certificates.SaveCertificates;
 
-namespace UseCases.Certificates
+namespace UseCases.Certificates;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<CertificateDto, Certificate>()
-                .ForMember(dest => dest.Image, opt => opt.Ignore());
-            CreateMap<ImageDto, Image>();
-        }
+        CreateMap<CertificateDto, Certificate>()
+            .ForMember(dest => dest.Image, opt => opt.Ignore());
+        CreateMap<ImageDto, Image>();
     }
 }
