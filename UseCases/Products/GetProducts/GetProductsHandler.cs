@@ -61,8 +61,15 @@ public class GetProductsHandler : IRequestHandler<GetProductsQuery, Page<Product
 
         var orderedProducts = allProducts.OrderBy(product => product.Description);
 
-        return await Page<ProductDto>.CreatePageAsync(orderedProducts, request.PageNumber, request.PageSize, cancellationToken,
+        var products = await Page<ProductDto>.CreatePageAsync(orderedProducts, request.PageNumber, request.PageSize, cancellationToken,
             product => _mapper.Map<ProductDto>((Product)product));
+
+        foreach (var product in products.Content)
+        {
+            product.Image ??= product.Category.Icon;
+        }
+
+        return products;
     }
 
     private int[] ParseIds(string ids)

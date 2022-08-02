@@ -39,93 +39,84 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Setup\Database\Categories.xml">
+      <Content Include="Setup\Database\Categories.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Partners\ideal.png">
+      </Content>
+      <Content Include="Images\Partners\ideal.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Partners\barko.jpg">
+      </Content>
+      <Content Include="Images\Partners\barko.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Partners\golden-seed.jpg">
+      </Content>
+      <Content Include="Images\Partners\golden-seed.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Partners\rolton.jpg">
+      </Content>
+      <Content Include="Images\Partners\rolton.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Partners\ml-best.png">
+      </Content>
+      <Content Include="Images\Partners\ml-best.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Certificates\cert1.jpg">
+      </Content>
+      <Content Include="Setup\Database\Partners.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Certificates\cert2.jpg">
+      </Content>
+      <Content Include="Images\Categories\canned-fish.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Certificates\cert3.jpg">
+      </Content>
+      <Content Include="Images\Categories\canned-fruit.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Setup\Database\Partners.xml">
+      </Content>
+      <Content Include="Images\Categories\canned-meat.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\canned-fish.svg">
+      </Content>
+      <Content Include="Images\Categories\canned-vegetables-and-mushrooms.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\canned-fruit.svg">
+      </Content>
+      <Content Include="Images\Categories\chocolate.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\canned-meat.svg">
+      </Content>
+      <Content Include="Images\Categories\fast-food.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\canned-vegetables-and-mushrooms.svg">
+      </Content>
+      <Content Include="Images\Categories\flour.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\chocolate.svg">
+      </Content>
+      <Content Include="Images\Categories\household-goods.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\fast-food.svg">
+      </Content>
+      <Content Include="Images\Categories\milk-production.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\flour.svg">
+      </Content>
+      <Content Include="Images\Categories\oil.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\household-goods.svg">
+      </Content>
+      <Content Include="Images\Categories\olives.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\milk-production.svg">
+      </Content>
+      <Content Include="Images\Categories\pasta.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\oil.svg">
+      </Content>
+      <Content Include="Images\Categories\powder.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\olives.svg">
+      </Content>
+      <Content Include="Images\Categories\ready-made-food.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\pasta.svg">
+      </Content>
+      <Content Include="Images\Categories\sauce.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\powder.svg">
+      </Content>
+      <Content Include="Images\Categories\species.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\ready-made-food.svg">
+      </Content>
+      <Content Include="Images\Categories\sugar.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\sauce.svg">
+      </Content>
+      <Content Include="Images\Categories\tea-and-coffee.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\species.svg">
+      </Content>
+      <Content Include="Images\Categories\water.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\sugar.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\tea-and-coffee.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Images\Categories\water.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
@@ -139,6 +130,13 @@
     <ItemGroup>
       <Folder Include="wwwroot\js" />
       <Folder Include="wwwroot\lib" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Images\Categories\seeds.png" />
+      <Content Include="Images\Categories\seeds.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     

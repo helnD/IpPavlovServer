@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -19,11 +20,18 @@ public class GetAllStocksQueryHandler : IRequestHandler<GetAllStocksQuery, IEnum
 
     public async Task<IEnumerable<Stock>> Handle(GetAllStocksQuery request, CancellationToken cancellationToken)
     {
-        return await context.Stocks.Include(stock => stock.RelatedProducts)
+        var stocks = await context.Stocks.Include(stock => stock.RelatedProducts)
             .ThenInclude(product => product.Category)
             .ThenInclude(category => category.Icon)
             .Include(stock => stock.RelatedProducts)
             .ThenInclude(product => product.Image)
             .ToListAsync(cancellationToken);
+
+        foreach (var product in stocks.SelectMany(stock => stock.RelatedProducts))
+        {
+            product.Image ??= product.Category.Icon;
+        }
+
+        return stocks;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using EasyData.EntityFrameworkCore;
+using DataType = EasyData.DataType;
 
 namespace Domain;
 
@@ -53,14 +54,14 @@ public record SalesRepresentative
     /// <summary>
     /// Time when representative begins work.
     /// </summary>
-    [MetaEntityAttr(DisplayName = "Начало рабочего дня")]
+    [MetaEntityAttr(DisplayName = "Начало рабочего дня", DataType = DataType.Time)]
     [Required]
     public TimeSpan StartOfWork { get; init; }
 
     /// <summary>
     /// Time when representative ends work.
     /// </summary>
-    [MetaEntityAttr(DisplayName = "Конец рабочего дня")]
+    [MetaEntityAttr(DisplayName = "Конец рабочего дня", DataType = DataType.Time)]
     [Required]
     public TimeSpan EndOfWork { get; init; }
 }

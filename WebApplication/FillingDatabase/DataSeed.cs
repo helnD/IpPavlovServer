@@ -5,10 +5,12 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using CSharpFunctionalExtensions;
 using Domain;
 using Infrastructure.Abstractions;
 using Infrastructure.Settings;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace WebApplication.FillingDatabase;
@@ -23,21 +25,24 @@ public class DataSeed
     private readonly ImagesSettings _imagesSettings;
     private readonly IImageResizer _imageResizer;
     private readonly Infrastructure.Abstractions.Unidecode _unidecode;
+    private readonly IDbContext _dbContext;
 
     private const short Threshold = 200;
+    private const string DealIconName = "deal.png";
 
     public DataSeed(XmlSeederFacade xmlSeederFacade,
         IOptions<DatabaseInitialization> initializationSettings,
         IOptions<ImagesSettings> imagesSettings,
         Infrastructure.Abstractions.Unidecode unidecode,
-        ProductsDataSeed productsDataSeed,
-        IImageResizer imageResizer)
+        IImageResizer imageResizer,
+        IDbContext dbContext)
     {
         _xmlSeederFacade = xmlSeederFacade;
         _initializationSettings = initializationSettings.Value;
         _imagesSettings = imagesSettings.Value;
         _unidecode = unidecode;
         _imageResizer = imageResizer;
+        _dbContext = dbContext;
     }
 
     /// <summary>
@@ -87,7 +92,7 @@ public class DataSeed
             Name = name,
             Link = link,
             Image = iconName is null
-                ? null
+                ? await GetOrCreateDealIconAsync()
                 : new Image
                 {
                     Path = Path.Combine(_imagesSettings.Root, _imagesSettings.Partners, iconName)
@@ -105,5 +110,29 @@ public class DataSeed
         var miniFilename = Path.Combine(root, _imagesSettings.MiniPrefix + name);
         await using var mimiImage = File.Create(miniFilename);
         await resizedImage.CopyToAsync(mimiImage);
+    }
+
+    private async Task<Image> GetOrCreateDealIconAsync()
+    {
+        var icon = await _dbContext.Images.FirstOrDefaultAsync(image => image.Path.Contains(DealIconName));
+        if (icon != null)
+        {
+            return icon;
+        }
+
+        var root = Path.Combine(_imagesSettings.Root, _imagesSettings.Partners);
+        var imagePath = Path.Combine(root, DealIconName);
+
+        await using var image = new FileStream(imagePath, FileMode.Open);
+        await using var resizedImage = await _imageResizer.Reduce(image, Threshold, default);
+
+        var miniFilename = Path.Combine(root, _imagesSettings.MiniPrefix + DealIconName);
+        await using var mimiImage = File.Create(miniFilename);
+        await resizedImage.CopyToAsync(mimiImage);
+
+        return new Image
+        {
+            Path = imagePath
+        };
     }
 }

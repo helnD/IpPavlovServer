@@ -90,7 +90,7 @@ public record Product
     /// Image of product.
     /// </summary>
     [MetaEntityAttr(DisplayName = "Изображение")]
-    public Image Image { get; init; }
+    public Image Image { get; set; }
 
     /// <summary>
     /// Related stock.

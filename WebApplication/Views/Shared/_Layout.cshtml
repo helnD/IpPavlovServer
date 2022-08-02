@@ -2,13 +2,14 @@
 @inject ILoggedUserAccessor LoggedUserAccessor;
 @{
     var userNameResult = await LoggedUserAccessor.GetCurrentUserAsync();
-    if (userNameResult.IsFailure)
-    {
-        throw new Exception(userNameResult.Error);
-    }
 
-    var user = userNameResult.Value;
-    var fullName = $"{user.FirstName} {user.LastName}";
+    var fullName = string.Empty;
+
+    if (userNameResult.IsSuccess)
+    {
+        var user = userNameResult.Value;
+        fullName = $"{user.FirstName} {user.LastName}";
+    }
 }
 
 <!DOCTYPE html>

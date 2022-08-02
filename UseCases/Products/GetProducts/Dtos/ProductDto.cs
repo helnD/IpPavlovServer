@@ -55,5 +55,5 @@ public class ProductDto
     /// <summary>
     /// Image of product.
     /// </summary>
-    public Image Image { get; init; }
+    public Image Image { get; set; }
 }
