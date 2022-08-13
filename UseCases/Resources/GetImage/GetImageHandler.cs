@@ -44,7 +44,9 @@ public class GetImageHandler : IRequestHandler<GetImageQuery, FileStream>
 
         var fileName = requiredImage.Path;
 
-        if (request.Size.ToUpper() == "MINI")
+        var isImageProductOrPartner = requiredImage.Path.Contains("Products") ||
+                                      requiredImage.Path.Contains("Partners");
+        if (request.Size.ToUpper() == "MINI" && isImageProductOrPartner)
         {
             var folderPath = Path.GetDirectoryName(requiredImage.Path);
             fileName = Path.Combine(folderPath, _imagesSettings.MiniPrefix + requiredImage.Name);

@@ -24,7 +24,7 @@ public class DataSeed
     private readonly DatabaseInitialization _initializationSettings;
     private readonly ImagesSettings _imagesSettings;
     private readonly IImageResizer _imageResizer;
-    private readonly Infrastructure.Abstractions.Unidecode _unidecode;
+    private readonly global::Infrastructure.Abstractions.Unidecode _unidecode;
     private readonly IDbContext _dbContext;
 
     private const short Threshold = 200;
@@ -33,7 +33,7 @@ public class DataSeed
     public DataSeed(XmlSeederFacade xmlSeederFacade,
         IOptions<DatabaseInitialization> initializationSettings,
         IOptions<ImagesSettings> imagesSettings,
-        Infrastructure.Abstractions.Unidecode unidecode,
+        global::Infrastructure.Abstractions.Unidecode unidecode,
         IImageResizer imageResizer,
         IDbContext dbContext)
     {

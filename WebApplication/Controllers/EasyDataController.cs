@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApplication.Controllers;
+using WebApplication.Infrastructure.Attributes;
 
 /// <summary>
 /// Controller for add/edit content.
 /// </summary>
 [Route("easydata")]
-[Authorize]
+[WebUiAuthorize]
 public class EasyDataController : Controller
 {
     private readonly ILogger<EasyDataController> _logger;
@@ -30,6 +31,10 @@ public class EasyDataController : Controller
     [Route("{**entity}")]
     public IActionResult Index(string entity)
     {
+        if (!_loggedUserAccessor.IsAuthenticated())
+        {
+            RedirectToAction(nameof(AuthController.Index), "Auth");
+        }
         return View();
     }
 }

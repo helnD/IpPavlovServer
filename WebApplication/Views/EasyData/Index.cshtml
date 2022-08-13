@@ -1,4 +1,9 @@
-﻿@{
+﻿@using Infrastructure.Abstractions
+@inject ILoggedUserAccessor LoggedUserAccessor;
+@{
+    var isAuthenticated = LoggedUserAccessor.IsAuthenticated();
+
+
     ViewData["Title"] = "Управление данными";
 }
 

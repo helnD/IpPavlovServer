@@ -15,9 +15,11 @@ using Infrastructure.Images;
 using Infrastructure.Implementations;
 using Infrastructure.Settings;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -78,7 +80,7 @@ public class Startup
 
         services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
 
-        services.AddTransient<Infrastructure.Abstractions.Unidecode>(_ => str => str.Unidecode());
+        services.AddTransient<global::Infrastructure.Abstractions.Unidecode>(_ => str => str.Unidecode());
 
         services.AddTransient<IImageApi>(_ => null);
 
@@ -91,7 +93,7 @@ public class Startup
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddAuthentication()
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -130,6 +132,15 @@ public class Startup
                 .AllowAnyMethod()
         );
 
+        // Middleware to forward the X-Forwarded-For and X-Forwarded-Proto headers.
+        var forwardedHeadersOptions = new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.All
+        };
+        forwardedHeadersOptions.KnownNetworks.Clear();
+        forwardedHeadersOptions.KnownProxies.Clear();
+        app.UseForwardedHeaders(forwardedHeadersOptions);
+
         app.UseAuthentication();
         app.UseAuthorization();
 
@@ -153,9 +164,6 @@ public class Startup
                     });
                 });
             });
-
-            endpoints.MapControllerRoute(name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             endpoints.MapControllers();
         });
