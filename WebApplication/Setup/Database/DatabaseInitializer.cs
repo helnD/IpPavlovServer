@@ -3,8 +3,10 @@ using Domain;
 using Extensions.Hosting.AsyncInitialization;
 using Infrastructure;
 using Infrastructure.DataAccess;
+using Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using WebApplication.FillingDatabase;
 
 namespace WebApplication.Setup.Database;
@@ -17,12 +19,17 @@ public class DatabaseInitializer : IAsyncInitializer
     private readonly AppDbContext _context;
     private readonly DataSeed _dataSeed;
     private readonly UserManager<User> _userManager;
+    private readonly AdminSettings adminSettings;
 
-    public DatabaseInitializer(AppDbContext context, DataSeed dataSeed, UserManager<User> userManager)
+    public DatabaseInitializer(AppDbContext context,
+        DataSeed dataSeed,
+        UserManager<User> userManager,
+        IOptions<AdminSettings> adminSettings)
     {
         _context = context;
         _dataSeed = dataSeed;
         _userManager = userManager;
+        this.adminSettings = adminSettings.Value;
     }
 
     /// <summary>
@@ -45,14 +52,14 @@ public class DatabaseInitializer : IAsyncInitializer
 
         var admin = new User
         {
-            Email = "admin@example.com",
-            UserName = "admin@example.com",
-            FirstName = "Admin",
-            LastName = "Admin",
-            PhoneNumber = "1111111111"
+            Email = adminSettings.Username,
+            UserName = adminSettings.Username,
+            FirstName = adminSettings.FirstName,
+            LastName = adminSettings.LastName,
+            PhoneNumber = adminSettings.Phone
         };
 
-        var result = await _userManager.CreateAsync(admin, "Qwert123#");
+        var result = await _userManager.CreateAsync(admin, adminSettings.Password);
         if (result.Succeeded)
         {
             await _context.SaveChangesAsync(default);

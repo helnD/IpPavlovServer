@@ -88,8 +88,13 @@ public class Startup
         services.Configure<ImagesSettings>(Configuration.GetSection("Resources:Images"));
         services.Configure<FilesSettings>(Configuration.GetSection("Resources:Files"));
         services.Configure<SmtpConfiguration>(Configuration.GetSection("SmtpConfiguration"));
+        services.Configure<AdminSettings>(Configuration.GetSection("Admin"));
 
-        services.AddIdentity<User, IdentityRole<int>>()
+        services.AddIdentity<User, IdentityRole<int>>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            })
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
