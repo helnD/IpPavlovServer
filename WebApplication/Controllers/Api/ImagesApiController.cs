@@ -60,6 +60,7 @@ public class ImagesApiController : ControllerBase
         "svg" => "image/svg+xml",
         "png" => "image/png",
         "jpg" => "image/jpeg",
+        "jpeg" => "image/jpeg",
         _ => throw new ArgumentOutOfRangeException("Not supported media type")
     };
 }

@@ -1,9 +1,5 @@
 ﻿@using Infrastructure.Abstractions
-@inject ILoggedUserAccessor LoggedUserAccessor;
 @{
-    var isAuthenticated = LoggedUserAccessor.IsAuthenticated();
-
-
     ViewData["Title"] = "Управление данными";
 }
 
@@ -29,7 +25,7 @@
         const changeEntitiesListTitle = () => {
             const titleElement = document.querySelector(".ed-menu-description")
 
-            if (titleElement.id.startsWith(changedIdPrefix)) {
+            if (titleElement && titleElement.id.startsWith(changedIdPrefix)) {
                 return
             }
 
@@ -67,6 +63,7 @@
         }
 
         const insertImageForm = () => {
+            console.log(window.location.href)
             if (window.location.href.includes('Image')) {
                 const imageInput = document.getElementById("image-input");
                 if (imageInput) {

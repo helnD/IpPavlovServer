@@ -100,8 +100,8 @@ public class Startup
                 options.Cookie.SameSite = SameSiteMode.Strict;
                 options.ExpireTimeSpan = TimeSpan.FromHours(3);
 
-                options.LoginPath = "/auth";
-                options.AccessDeniedPath = "/auth";
+                options.LoginPath = "/admin/auth";
+                options.AccessDeniedPath = "/admin/auth";
                 options.SlidingExpiration = true;
             });
 
@@ -122,6 +122,10 @@ public class Startup
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication v1"));
         }
 
+        app.UseForwardedHeaders(new ForwardedHeadersOptions {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
+
         app.UseRouting();
         app.UseStaticFiles();
 
@@ -131,15 +135,6 @@ public class Startup
                 .AllowAnyHeader()
                 .AllowAnyMethod()
         );
-
-        // Middleware to forward the X-Forwarded-For and X-Forwarded-Proto headers.
-        var forwardedHeadersOptions = new ForwardedHeadersOptions
-        {
-            ForwardedHeaders = ForwardedHeaders.All
-        };
-        forwardedHeadersOptions.KnownNetworks.Clear();
-        forwardedHeadersOptions.KnownProxies.Clear();
-        app.UseForwardedHeaders(forwardedHeadersOptions);
 
         app.UseAuthentication();
         app.UseAuthorization();

@@ -11,7 +11,7 @@ namespace WebApplication.Controllers;
 /// <summary>
 /// Authentication controller.
 /// </summary>
-[Route("auth")]
+[Route("admin/auth")]
 public class AuthController : Controller
 {
     private readonly IMediator _mediator;

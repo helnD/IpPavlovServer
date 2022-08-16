@@ -8,21 +8,15 @@ using WebApplication.Infrastructure.Attributes;
 /// <summary>
 /// Controller for add/edit content.
 /// </summary>
-[Route("easydata")]
+[Route("admin/easydata")]
 [WebUiAuthorize]
 public class EasyDataController : Controller
 {
-    private readonly ILogger<EasyDataController> _logger;
-    private readonly ILoggedUserAccessor _loggedUserAccessor;
-
     /// <summary>
     /// Constructor.
     /// </summary>
-    public EasyDataController(ILogger<EasyDataController> logger,
-        ILoggedUserAccessor loggedUserAccessor)
+    public EasyDataController()
     {
-        _logger = logger;
-        _loggedUserAccessor = loggedUserAccessor;
     }
 
     /// <summary>
@@ -31,10 +25,6 @@ public class EasyDataController : Controller
     [Route("{**entity}")]
     public IActionResult Index(string entity)
     {
-        if (!_loggedUserAccessor.IsAuthenticated())
-        {
-            RedirectToAction(nameof(AuthController.Index), "Auth");
-        }
         return View();
     }
 }
