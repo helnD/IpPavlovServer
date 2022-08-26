@@ -1,6 +1,11 @@
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
+using Infrastructure.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Saritasa.Tools.Domain.Exceptions;
 using UseCases.Users.Authenticate;
@@ -11,17 +16,20 @@ namespace WebApplication.Controllers;
 /// <summary>
 /// Authentication controller.
 /// </summary>
-[Route("auth")]
+[Route("admin/auth")]
+[AllowAnonymous]
 public class AuthController : Controller
 {
     private readonly IMediator _mediator;
+    private readonly SignInManager<User> _signInManager;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public AuthController(IMediator mediator)
+    public AuthController(IMediator mediator, SignInManager<User> signInManager)
     {
         _mediator = mediator;
+        _signInManager = signInManager;
     }
 
     /// <summary>
@@ -29,6 +37,11 @@ public class AuthController : Controller
     /// </summary>
     public IActionResult Index()
     {
+        if (_signInManager.IsSignedIn(HttpContext.User))
+        {
+            return RedirectToAction(nameof(EasyDataController.Index), "EasyData");
+        }
+
         return View(new LoginViewModel());
     }
 

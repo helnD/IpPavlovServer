@@ -25,8 +25,8 @@ public class EmailSender : IEmailSender
 
     private const string QuestionSubject = "Вопрос с сайта";
 
-    private const string QuestionTemplate = "Question.html";
-    private const string CooperationRequestTemplate = "CooperationRequest.html";
+    private const string QuestionTemplate = "EmailTemplates/Question.html";
+    private const string CooperationRequestTemplate = "EmailTemplates/CooperationRequest.html";
 
     /// <summary>
     /// Constructor.

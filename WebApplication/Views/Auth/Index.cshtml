@@ -5,7 +5,6 @@
 }
 
 <form class="auth-container" asp-action="Login" method="post">
-    @Html.AntiForgeryToken()
     <input type="text" class="form-control" placeholder="Введите логин" asp-for="Login"/>
     <input type="password" class="form-control" placeholder="Введите пароль" asp-for="Password"/>
     @if (!ViewData.ModelState.IsValid)

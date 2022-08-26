@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Infrastructure.Pagination;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Products.GetProductById;
 using UseCases.Products.GetProducts;
@@ -14,6 +15,7 @@ namespace WebApplication.Controllers.Api;
 /// </summary>
 [ApiController]
 [Route("api/v1/products")]
+[AllowAnonymous]
 public class ProductsApiController
 {
     private readonly IMediator _mediator;

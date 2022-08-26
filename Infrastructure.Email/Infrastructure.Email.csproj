@@ -15,9 +15,13 @@
 
     <ItemGroup>
       <None Remove="EmailTemplates\Question.html" />
-      <EmbeddedResource Include="EmailTemplates\Question.html">
+      <Content Include="EmailTemplates\Question.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
+      </Content>
+      <None Remove="EmailTemplates\CooperationRequest.html" />
+      <Content Include="EmailTemplates\CooperationRequest.html">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

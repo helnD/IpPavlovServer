@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Resources.GetImage;
@@ -16,6 +17,7 @@ namespace WebApplication.Controllers.Api;
 /// </summary>
 [ApiController]
 [Route("api/v1/images")]
+[AllowAnonymous]
 public class ImagesApiController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -60,6 +62,7 @@ public class ImagesApiController : ControllerBase
         "svg" => "image/svg+xml",
         "png" => "image/png",
         "jpg" => "image/jpeg",
+        "jpeg" => "image/jpeg",
         _ => throw new ArgumentOutOfRangeException("Not supported media type")
     };
 }

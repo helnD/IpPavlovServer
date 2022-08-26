@@ -59,6 +59,18 @@ public sealed class AppDbContext : IdentityDbContext<User, IdentityRole<int>, in
     /// <inheritdoc/>
     public DbSet<T> Entity<T>() where T : class, new() => Set<T>();
 
+    /// <inheritdoc/>
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<Stock>()
+            .HasMany(s => s.RelatedProducts)
+            .WithOne(p => p.Stock)
+            .HasForeignKey(p => p.StockId)
+            .OnDelete(DeleteBehavior.SetNull);
+    }
+
     /// <inheritdoc cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {

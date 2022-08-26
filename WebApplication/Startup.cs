@@ -15,10 +15,13 @@ using Infrastructure.Images;
 using Infrastructure.Implementations;
 using Infrastructure.Settings;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +49,9 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+        services.AddControllers(options => options.Filters.Add(new AuthorizeFilter()));
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebApplication", Version = "v1"});
@@ -78,7 +83,7 @@ public class Startup
 
         services.AddTransient<IExcelReader>(_ => new NpoiExcelReader("Files/price-list.xlsx", ""));
 
-        services.AddTransient<Infrastructure.Abstractions.Unidecode>(_ => str => str.Unidecode());
+        services.AddTransient<global::Infrastructure.Abstractions.Unidecode>(_ => str => str.Unidecode());
 
         services.AddTransient<IImageApi>(_ => null);
 
@@ -86,22 +91,26 @@ public class Startup
         services.Configure<ImagesSettings>(Configuration.GetSection("Resources:Images"));
         services.Configure<FilesSettings>(Configuration.GetSection("Resources:Files"));
         services.Configure<SmtpConfiguration>(Configuration.GetSection("SmtpConfiguration"));
+        services.Configure<AdminSettings>(Configuration.GetSection("Admin"));
 
-        services.AddIdentity<User, IdentityRole<int>>()
-            .AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders();
-
-        services.AddAuthentication()
-            .AddCookie(options =>
+        services.AddIdentity<User, IdentityRole<int>>(opt =>
             {
-                options.Cookie.HttpOnly = true;
-                options.Cookie.SameSite = SameSiteMode.Strict;
-                options.ExpireTimeSpan = TimeSpan.FromHours(3);
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            })
+            .AddEntityFrameworkStores<AppDbContext>();
 
-                options.LoginPath = "/auth";
-                options.AccessDeniedPath = "/auth";
-                options.SlidingExpiration = true;
-            });
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SameSite = SameSiteMode.Strict;
+            options.Cookie.Path = "/admin";
+            options.ExpireTimeSpan = TimeSpan.FromHours(3);
+
+            options.LoginPath = "/admin/auth";
+            options.AccessDeniedPath = "/admin/auth";
+            options.SlidingExpiration = true;
+        });
 
         services.AddMediatR(typeof(GetLeadersQuery).Assembly);
 
@@ -120,7 +129,15 @@ public class Startup
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication v1"));
         }
 
+        app.UseForwardedHeaders(new ForwardedHeadersOptions {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
+
         app.UseRouting();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
         app.UseStaticFiles();
 
         app.UseCors(builder =>
@@ -129,9 +146,6 @@ public class Startup
                 .AllowAnyHeader()
                 .AllowAnyMethod()
         );
-
-        app.UseAuthentication();
-        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
@@ -153,9 +167,6 @@ public class Startup
                     });
                 });
             });
-
-            endpoints.MapControllerRoute(name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             endpoints.MapControllers();
         });

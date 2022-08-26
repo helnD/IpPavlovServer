@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Partners.GetPartners;
 
@@ -13,6 +14,7 @@ namespace WebApplication.Controllers.Api;
 /// </summary>
 [ApiController]
 [Route("api/v1/partners")]
+[AllowAnonymous]
 public class PartnersApiController
 {
     private readonly IMediator _mediator;

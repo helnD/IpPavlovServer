@@ -27,7 +27,7 @@ public class ProductsDataSeed
     private readonly IExcelReader _excelReader;
     private readonly IDbContext _context;
     private readonly ILogger<ProductsDataSeed> _logger;
-    private readonly Infrastructure.Abstractions.Unidecode _unidecode;
+    private readonly global::Infrastructure.Abstractions.Unidecode _unidecode;
     private readonly IMediator _mediator;
 
     private const int ProductNumber = 0;
@@ -45,7 +45,7 @@ public class ProductsDataSeed
     public ProductsDataSeed(IExcelReader excelReader,
         IDbContext context,
         ILogger<ProductsDataSeed> logger,
-        Infrastructure.Abstractions.Unidecode unidecode,
+        global::Infrastructure.Abstractions.Unidecode unidecode,
         IMediator mediator)
     {
         _excelReader = excelReader;
