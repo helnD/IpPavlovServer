@@ -11,6 +11,11 @@ public class SmtpConfiguration
     public string PathToTemplates { get; init; }
 
     /// <summary>
+    /// Receiver email.
+    /// </summary>
+    public string Receiver { get; set; }
+
+    /// <summary>
     /// Email server domain.
     /// </summary>
     public string Domain { get; init; }

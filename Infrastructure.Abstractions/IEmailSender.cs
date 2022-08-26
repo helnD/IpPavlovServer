@@ -17,5 +17,5 @@ public interface IEmailSender
     /// <param name="cancellationToken">Cancellation token.</param>
     Task SendQuestionAsync(string name, string email, string question, CancellationToken cancellationToken);
 
-    Task SendCooperationRequest(string name, string company, string email, CancellationToken cancellationToken);
+    Task SendCooperationRequest(string name, string company, string email, string phone, CancellationToken cancellationToken);
 }

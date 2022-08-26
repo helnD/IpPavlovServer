@@ -60,19 +60,20 @@ public class EmailSender : IEmailSender
         await SendEmailByTemplate(QuestionTemplate, mailInformation, cancellationToken);
     }
 
-    public async Task SendCooperationRequest(string name, string company, string email, CancellationToken cancellationToken)
+    public async Task SendCooperationRequest(string name, string company, string email, string phone, CancellationToken cancellationToken)
     {
         var placeholders = new Dictionary<string, string>
         {
             { "USERNAME", name },
             { "COMPANY", company },
-            { "EMAIL", email }
+            { "EMAIL", email },
+            { "PHONE", phone }
         };
 
         var mailInformation = new MailInformation
         {
             Name = name,
-            Email = email,
+            Email = _configuration.Login,
             Subject = QuestionSubject,
             Placeholders = placeholders
         };
@@ -107,7 +108,7 @@ public class EmailSender : IEmailSender
     {
         try
         {
-            await client.ConnectAsync(_configuration.Domain, _configuration.Port, false, cancellationToken);
+            await client.ConnectAsync(_configuration.Domain, _configuration.Port, true, cancellationToken);
             await client.AuthenticateAsync(_configuration.Login, _configuration.Password, cancellationToken);
         }
         catch (SocketException exception)
@@ -148,7 +149,7 @@ public class EmailSender : IEmailSender
         };
 
         message.From.Add(new MailboxAddress("ИП Павлов | Сайт", _configuration.Login));
-        message.To.Add(new MailboxAddress(mailInformation.Name, _configuration.Login));
+        message.To.Add(new MailboxAddress(mailInformation.Name, _configuration.Receiver));
 
         return message;
     }

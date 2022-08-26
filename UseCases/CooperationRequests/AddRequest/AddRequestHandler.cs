@@ -26,6 +26,6 @@ public class AddRequestHandler : AsyncRequestHandler<AddRequestCommand>
         await _context.CooperationRequests.AddAsync(requestToAdd, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
-        await _emailSender.SendCooperationRequest(request.Name, request.Company, request.Email, cancellationToken);
+        await _emailSender.SendCooperationRequest(request.Name, request.Company, request.Email, request.Phone, cancellationToken);
     }
 }
