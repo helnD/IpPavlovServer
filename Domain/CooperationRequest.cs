@@ -35,6 +35,9 @@ public class CooperationRequest
     [MetaEntityAttr(DisplayName = "E-Mail")]
     public string Email { get; init; }
 
+    /// <summary>
+    /// Phone number of representative.
+    /// </summary>
     [Required]
     [MaxLength(20)]
     [MetaEntityAttr(DisplayName = "Телефон")]
