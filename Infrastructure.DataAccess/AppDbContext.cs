@@ -65,8 +65,9 @@ public sealed class AppDbContext : IdentityDbContext<User, IdentityRole<int>, in
         base.OnModelCreating(builder);
 
         builder.Entity<Stock>()
-            .HasOne<Product>()
-            .WithMany()
+            .HasMany(s => s.RelatedProducts)
+            .WithOne(p => p.Stock)
+            .HasForeignKey(p => p.StockId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 

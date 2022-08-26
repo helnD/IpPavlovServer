@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.CooperationRequests.AddRequest;
 
@@ -8,6 +9,7 @@ namespace WebApplication.Controllers.Api;
 
 [ApiController]
 [Route("api/v1/cooperation-requests")]
+[AllowAnonymous]
 public class CooperationRequestsApiController
 {
     private readonly IMediator _mediator;

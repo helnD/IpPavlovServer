@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Categories.GetCategories;
 using UseCases.Categories.GetCategory;
@@ -15,6 +16,7 @@ namespace WebApplication.Controllers.Api;
 /// </summary>
 [ApiController]
 [Route("api/v1/categories")]
+[AllowAnonymous]
 public class CategoriesApiController
 {
     private readonly IMediator _mediator;

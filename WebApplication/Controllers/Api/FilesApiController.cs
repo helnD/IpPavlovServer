@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Resources.GetPriceList;
 
@@ -11,6 +12,7 @@ namespace WebApplication.Controllers.Api;
 /// </summary>
 [ApiController]
 [Route("api/v1/files")]
+[AllowAnonymous]
 public class FilesApiController : ControllerBase
 {
     private readonly IMediator _mediator;

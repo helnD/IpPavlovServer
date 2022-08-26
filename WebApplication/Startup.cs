@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,7 +49,9 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+        services.AddControllers(options => options.Filters.Add(new AuthorizeFilter()));
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebApplication", Version = "v1"});
@@ -95,20 +98,19 @@ public class Startup
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
             })
-            .AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<AppDbContext>();
 
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.Cookie.SameSite = SameSiteMode.Strict;
-                options.ExpireTimeSpan = TimeSpan.FromHours(3);
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SameSite = SameSiteMode.Strict;
+            options.Cookie.Path = "/admin";
+            options.ExpireTimeSpan = TimeSpan.FromHours(3);
 
-                options.LoginPath = "/admin/auth";
-                options.AccessDeniedPath = "/admin/auth";
-                options.SlidingExpiration = true;
-            });
+            options.LoginPath = "/admin/auth";
+            options.AccessDeniedPath = "/admin/auth";
+            options.SlidingExpiration = true;
+        });
 
         services.AddMediatR(typeof(GetLeadersQuery).Assembly);
 
@@ -132,6 +134,10 @@ public class Startup
         });
 
         app.UseRouting();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
         app.UseStaticFiles();
 
         app.UseCors(builder =>
@@ -140,9 +146,6 @@ public class Startup
                 .AllowAnyHeader()
                 .AllowAnyMethod()
         );
-
-        app.UseAuthentication();
-        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {

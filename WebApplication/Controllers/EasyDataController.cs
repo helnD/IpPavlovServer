@@ -9,7 +9,6 @@ using WebApplication.Infrastructure.Attributes;
 /// Controller for add/edit content.
 /// </summary>
 [Route("admin/easydata")]
-[WebUiAuthorize]
 public class EasyDataController : Controller
 {
     /// <summary>

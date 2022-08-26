@@ -1,9 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace UseCases.Users.Authenticate;
 
@@ -12,19 +14,19 @@ namespace UseCases.Users.Authenticate;
 /// </summary>
 public class LogoutCommandHandler : AsyncRequestHandler<LogoutCommand>
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly SignInManager<User> signInManager;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public LogoutCommandHandler(IHttpContextAccessor httpContextAccessor)
+    public LogoutCommandHandler(SignInManager<User> signInManager)
     {
-        _httpContextAccessor = httpContextAccessor;
+        this.signInManager = signInManager;
     }
 
     /// <inheritdoc/>
     protected override async Task Handle(LogoutCommand request, CancellationToken cancellationToken)
     {
-        await _httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await signInManager.SignOutAsync();
     }
 }

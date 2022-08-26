@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using EasyData.EntityFrameworkCore;
 
 namespace Domain;
@@ -96,6 +97,7 @@ public record Product
     /// Related stock.
     /// </summary>
     [MetaEntityAttr(ShowOnView = false)]
+    [ForeignKey(nameof(Stock))]
     public int? StockId { get; set; }
 
     /// <summary>

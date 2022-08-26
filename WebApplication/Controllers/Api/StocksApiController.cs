@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Stocks.GetAllStocks;
 
@@ -10,6 +11,7 @@ namespace WebApplication.Controllers.Api;
 
 [ApiController]
 [Route("api/v1/stocks")]
+[AllowAnonymous]
 public class StocksApiController
 {
     private readonly IMediator mediator;

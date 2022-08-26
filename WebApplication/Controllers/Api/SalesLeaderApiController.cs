@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Leaders.GetLeaders;
 
@@ -13,6 +14,7 @@ namespace WebApplication.Controllers.Api;
 /// </summary>
 [ApiController]
 [Route("api/v1/sales-leaders")]
+[AllowAnonymous]
 public class SalesLeaderApiController
 {
     private readonly IMediator _mediator;

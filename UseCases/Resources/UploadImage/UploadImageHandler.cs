@@ -63,6 +63,8 @@ public class UploadImageHandler : IRequestHandler<UploadImageCommand, int>
             ? validFileName + fileExtenstion
             : $"{validFileName}-{imagesNumberWithSameName + 1}{fileExtenstion}";
 
+        Directory.CreateDirectory(imageFolder);
+
         var imagePath = Path.Combine(imageFolder, imageName);
         await using var imageFile = new FileStream(imagePath, FileMode.Create);
         await request.ImageStream.CopyToAsync(imageFile, cancellationToken);

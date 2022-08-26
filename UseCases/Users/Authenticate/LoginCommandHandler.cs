@@ -40,11 +40,5 @@ internal class LoginCommandHandler : AsyncRequestHandler<LoginCommand>
         {
             throw new ForbiddenException("Неверный логин или пароль");
         }
-
-        var user = await _userManager.FindByNameAsync(request.Login);
-
-        var principal = await _signInManager.CreateUserPrincipalAsync(user);
-        await httpContextAccessor.HttpContext.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
 }
